@@ -1,0 +1,22 @@
+# MkDocs build directory
+site/
+
+# Python environment and cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# MkDocs search index cache
+.cache/
+
+# Local configuration files
+.env
+.python-version
