@@ -1,0 +1,2030 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Weipeng">
+      
+      
+      
+        <link rel="prev" href="../Fish_FEM_1/">
+      
+      
+        <link rel="next" href="../Fish_FEM_3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Chapter 3 - Computational Mechanics Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/math.css">
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/theme-tweaks.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-3-strong-and-weak-forms-of-one-dimensional-problems" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Computational Mechanics Notes" class="md-header__button md-logo" aria-label="Computational Mechanics Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Computational Mechanics Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 3
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Computational Mechanics Notes" class="md-nav__button md-logo" aria-label="Computational Mechanics Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    Computational Mechanics Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finite Element Method
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Finite Element Method
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Course (2007)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    First Course (2007)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../About/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Fish_FEM_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-strong-form-in-one-dimensional-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The strong form in one-dimensional problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The strong form in one-dimensional problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#an-axial-loaded-elastic-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        An axial loaded elastic bar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steady-state-heat-conduction-in-one-dimension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steady-state heat conduction in one dimension
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diffusion-in-one-dimension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diffusion in one dimension
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-weak-form-in-one-dimension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The weak form in one dimension
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The weak form in one dimension">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirements-for-using-weak-form-admissible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements for using weak form: Admissible
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Continuity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-equivalence-between-the-weak-and-strong-forms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The equivalence between the weak and strong forms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-dimensional-stress-analysis-with-arbitary-boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One-dimensional stress analysis with arbitary boundary conditions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="One-dimensional stress analysis with arbitary boundary conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strong-form-for-1d-stress-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strong form for 1D stress analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weak-form-for-1d-stress-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weak form for 1D stress analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-dimensional-heat-conduction-with-arbitary-boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One-dimensional heat conduction with arbitary boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-point-boundary-value-problems-wit-generalized-boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-point boundary value problems wit generalized boundary conditions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Two-point boundary value problems wit generalized boundary conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strong-form-for-two-point-boundary-value-problems-with-generalized-boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strong form for two-point boundary value problems with generalized boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weak-form-for-two-point-boundary-value-problems-with-generalized-boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weak form for two-point boundary value problems with generalized boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advection-diffusion-1d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advection-diffusion (1D)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advection-diffusion (1D)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strong-form-of-advection-diffusion-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strong form of advection-diffusion equation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weak-form-of-advection-diffusion-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weak form of advection-diffusion equation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimum-potential-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimum potential energy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Minimum potential energy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theorem-of-minimum-potential-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theorem of minimum potential energy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#principle-of-virtual-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Principle of virtual work
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrability
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Fish_FEM_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Fish_FEM_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Fish_FEM_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Fish_FEM_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 7
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differential Equation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Differential Equation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python ODE (2024)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python ODE (2024)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../de/python_ode/About/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../de/python_ode/Chapter%201%20Programming%20a%20Simple%20ODE%20Solver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1 Programming a Simple ODE Solver
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../de/python_ode/Chapter%202%20Improving%20the%20Accuracy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2 Improving the Accuracy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../de/python_ode/Chapter%203%20Stable%20Solvers%20for%20Stiff%20ODE%20Systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3 Stable Solvers for Stiff ODE Systems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../de/python_ode/Chapter%204%20Adaptive%20Time%20Step%20Methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4 Adaptive Time Step Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../de/python_ode/Chapter%205%20Modeling%20Infectious%20Diseases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5 Modeling Infectious Diseases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../de/python_ode/Appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Miscellaneous
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Miscellaneous
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/elasticity_plasticity_chen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chen's book (in Chinese)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/tensor_eigenchris/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eigenchris (incomplete)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-strong-form-in-one-dimensional-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The strong form in one-dimensional problems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The strong form in one-dimensional problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#an-axial-loaded-elastic-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        An axial loaded elastic bar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steady-state-heat-conduction-in-one-dimension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steady-state heat conduction in one dimension
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diffusion-in-one-dimension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diffusion in one dimension
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-weak-form-in-one-dimension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The weak form in one dimension
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The weak form in one dimension">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirements-for-using-weak-form-admissible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements for using weak form: Admissible
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Continuity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-equivalence-between-the-weak-and-strong-forms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The equivalence between the weak and strong forms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-dimensional-stress-analysis-with-arbitary-boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One-dimensional stress analysis with arbitary boundary conditions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="One-dimensional stress analysis with arbitary boundary conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strong-form-for-1d-stress-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strong form for 1D stress analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weak-form-for-1d-stress-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weak form for 1D stress analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-dimensional-heat-conduction-with-arbitary-boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One-dimensional heat conduction with arbitary boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-point-boundary-value-problems-wit-generalized-boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-point boundary value problems wit generalized boundary conditions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Two-point boundary value problems wit generalized boundary conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strong-form-for-two-point-boundary-value-problems-with-generalized-boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strong form for two-point boundary value problems with generalized boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weak-form-for-two-point-boundary-value-problems-with-generalized-boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weak form for two-point boundary value problems with generalized boundary conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advection-diffusion-1d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advection-diffusion (1D)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advection-diffusion (1D)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strong-form-of-advection-diffusion-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strong form of advection-diffusion equation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weak-form-of-advection-diffusion-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weak form of advection-diffusion equation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimum-potential-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimum potential energy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Minimum potential energy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theorem-of-minimum-potential-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theorem of minimum potential energy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#principle-of-virtual-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Principle of virtual work
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrability
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="chapter-3-strong-and-weak-forms-of-one-dimensional-problems">Chapter 3 Strong and weak forms of one-dimensional problems</h1>
+<p><strong>Strong form</strong>: Governing equations along with the boundary conditions</p>
+<p><strong>Weak form</strong>: Integral form of the equations in the strong form ----&gt; Weak continuity requirements</p>
+<p><strong>Finite difference method (FDM)</strong>: </p>
+<p>Strong form -----&gt; A set of discrete equations</p>
+<p><strong>Finite element method (FEM)</strong>: </p>
+<p>Strong form -----&gt; Weak form -----&gt; (Combined with the approximation of functions) -----&gt; Discrete equations</p>
+<hr />
+<h2 id="the-strong-form-in-one-dimensional-problems">The strong form in one-dimensional problems</h2>
+<h3 id="an-axial-loaded-elastic-bar">An axial loaded elastic bar</h3>
+<p><img alt="1DBar" src="../pic/3.1.png" /></p>
+<p>Internal force <span class="arithmatex">\(p(x)\)</span>; body force <span class="arithmatex">\(b(x)\)</span> (force per unit length); traction <span class="arithmatex">\(\overline{t}\)</span> (force per unit area)</p>
+<p><span class="arithmatex">\(-p(x)+b(x+\frac{\Delta x}{2})\Delta x+p(x+\Delta x)=0\)</span></p>
+<p><span class="arithmatex">\(\frac{p(x+\Delta x)-p(x)}{\Delta x}+b(x+\frac{\Delta x}{2})=0\)</span></p>
+<p>take the limit <span class="arithmatex">\(\Delta x \rightarrow 0\)</span></p>
+<p><span class="arithmatex">\(\frac{d p(x)}{dx}+b(x)=0\)</span></p>
+<p>Then, linear assumption (def of strain &amp; stress-strain law) is adopted <span class="arithmatex">\(\Downarrow\)</span></p>
+<p>strain is given by:</p>
+<p><span class="arithmatex">\(\varepsilon(x)=\lim\limits_{\Delta x \rightarrow 0}\frac{u(x+\Delta x)-u(x)}{\Delta x}=\frac{du}{dx}\)</span></p>
+<p>Internal force is given by</p>
+<p><span class="arithmatex">\(p(x)=A(x)\sigma (x)=A(x)E\varepsilon (x)=AE\frac{du}{dx}\)</span></p>
+<p>So, <strong>governing equation</strong> (2-order ODE) is given by</p>
+<p><span class="arithmatex">\(\frac{d}{dx}(AE\frac{du}{dx})+b=0\)</span>, (<span class="arithmatex">\(0&lt;x&lt;l\)</span>)</p>
+<p>With the boundary conditions at the two ends, the strong form becomes</p>
+<p><span class="arithmatex">\(\frac{d}{dx}(AE\frac{du}{dx})+b=0\)</span> on <span class="arithmatex">\(0&lt;x&lt;l\)</span></p>
+<p><span class="arithmatex">\(\sigma (x=0)=(E\frac{du}{dx})_{x=0}=-\overline{t}\)</span></p>
+<p><span class="arithmatex">\(u(x=l)=\overline{u}\)</span></p>
+<p><blockquote>Note that the sign convention for <span class="arithmatex">\(\sigma\)</span> and <span class="arithmatex">\(\overline{t}\)</span>, former is tension + and compression -, latter is positive x-axis +,negative x-axis -</blockquote></p>
+<hr />
+<h3 id="steady-state-heat-conduction-in-one-dimension">Steady-state heat conduction in one dimension</h3>
+<p>The <strong>form</strong> of heat transfer: conduction, convection, thermal radiation</p>
+<p><img alt="1DCondcution" src="../pic/3.2.png" /></p>
+<p>Conservation of energy:</p>
+<p><span class="arithmatex">\(s(x+\frac{\Delta x}{2})\Delta x+q(x)A(x)-q(x+\Delta x)A(x+\Delta x)=0\)</span></p>
+<p><span class="arithmatex">\(\frac{q(x+\Delta x)A(x+\Delta x)-\Delta x+q(x)A(x)}{\Delta x}-s(x+\frac{\Delta x}{2})=0\)</span></p>
+<p>Take the limit <span class="arithmatex">\(\Delta x \rightarrow 0\)</span></p>
+<p><span class="arithmatex">\(\frac{dqA}{dx}-s=0\)</span></p>
+<p>The constitutive equation for heat flow is given by</p>
+<p><span class="arithmatex">\(q=-k\frac{dT}{dx}\)</span></p>
+<p>Then, the governing equation is given by</p>
+<p><span class="arithmatex">\(\frac{d}{dx}(Ak\frac{dT}{dx})+s=0\)</span></p>
+<p>With the boudany conditions at two ends, the strong form becomes</p>
+<p><span class="arithmatex">\(\frac{d}{dx}(Ak\frac{dT}{dx})+s=0\)</span> on <span class="arithmatex">\(0&lt;x&lt;l\)</span></p>
+<p><span class="arithmatex">\(q=-k\frac{dT}{dx}=-\overline{q}\)</span> on <span class="arithmatex">\(x=0\)</span></p>
+<p><span class="arithmatex">\(T=\overline{T}\)</span> on <span class="arithmatex">\(x=l\)</span></p>
+<p><blockquote>The negative sign in <span class="arithmatex">\(q=-\overline{q}\)</span> is beacuse the prescribed flux <span class="arithmatex">\(\overline{q}\)</span> is positive when heat flows out of the bar</blockquote></p>
+<hr />
+<h3 id="diffusion-in-one-dimension">Diffusion in one dimension</h3>
+<p>P46 Similar to 1D heat conduction...</p>
+<hr />
+<h2 id="the-weak-form-in-one-dimension">The weak form in one dimension</h2>
+<p>For the problem of axial loaded elastic bar, ...</p>
+<p>use the <strong>weight function</strong> (<strong>test function</strong>) <span class="arithmatex">\(w(x)\)</span> to multiply the gonverning equation and boudary conditions ...</p>
+<p>and integrate over the domian they hold</p>
+<p><span class="arithmatex">\(\int_0^l w[\frac{d}{dx}(AE\frac{du}{dx})+b]dx=0\)</span>, <span class="arithmatex">\(\forall w\)</span> with <span class="arithmatex">\(w(l)=0\)</span></p>
+<p><span class="arithmatex">\((wA(E\frac{du}{dx}+\overline{t}))_{x=0}=0\)</span>, <span class="arithmatex">\(\forall w\)</span> with <span class="arithmatex">\(w(l)=0\)</span></p>
+<blockquote>The arbitariness of the weight function $w(x)$ is crucial</blockquote>
+
+<p>Use the integration by parts, the weak form is transformed into</p>
+<p><span class="arithmatex">\(\int_0^l w[\frac{d}{dx}(AE\frac{du}{dx})+b]dx=(wAE\frac{du}{dx})|_0^l-\int_0^l \frac{dw}{dx}AE\frac{du}{dx}dx+\int_0^lwbdx=0\)</span></p>
+<p>For <span class="arithmatex">\(w(l)=0\)</span> and <span class="arithmatex">\((wA(E\frac{du}{dx}+\overline{t}))_{x=0}=0\)</span></p>
+<p><span class="arithmatex">\((wA\sigma)_{x=l}-(wA\sigma)_{x=0}-\int_0^l \frac{dw}{dx}AE\frac{du}{dx}dx+\int_0^lbdx=(wA\overline{t})_{x=0}-\int_0^l \frac{dw}{dx}AE\frac{du}{dx}dx+\int_0^lwbdx=0\)</span></p>
+<p>So the weak form of the above problem becomes:</p>
+<p><span class="arithmatex">\(--------------------------\)</span></p>
+<p>Find <span class="arithmatex">\(u(x)\)</span> among the smooth functions that satisfy <span class="arithmatex">\(u(l)=\overline{u}\)</span> such that</p>
+<p><span class="arithmatex">\(\int_0^l \frac{dw}{dx}AE\frac{du}{dx}dx=(wA\overline{t})_{x=0}+\int_0^lwbdx\)</span>, <span class="arithmatex">\(\forall w\)</span> with <span class="arithmatex">\(w(l)=0\)</span></p>
+<p><span class="arithmatex">\(--------------------------\)</span></p>
+<p><strong>Trial solutions</strong>/ <strong>candidate solutions</strong>: a set of admissible solutions <span class="arithmatex">\(u(x)\)</span> that satisfy certain conditions</p>
+<h3 id="boundary-conditions">Boundary conditions</h3>
+<p><strong>Essential</strong> boundary conditions: BCs that trial solutions <span class="arithmatex">\(u(x)\)</span> must saitisfy (Dispalcement)</p>
+<p><strong>Natural</strong> boundary conditions: BCs that emnate naturally from the weak form and trial solution <span class="arithmatex">\(u(x)\)</span> needed to satisfy (Traction)</p>
+<h3 id="requirements-for-using-weak-form-admissible">Requirements for using weak form: <strong>Admissible</strong></h3>
+<p>Admissible of trial solution: smooth and satisifies the essential boundary conditions</p>
+<p>Admissible of weight function: smooth and vanishes the essential boundaries</p>
+<hr />
+<h2 id="continuity">Continuity</h2>
+<p><span class="arithmatex">\(C^n\)</span> fucntion: the derivatives of the function of order <span class="arithmatex">\(j\)</span> exist (0<span class="arithmatex">\(\leq j \leq n\)</span>) and are continuous functions in the entire domain</p>
+<p><img alt="Continuity" src="../pic/3.3.png" /></p>
+<blockquote>Jumps: Strong discontinuities; Kinks: Weak discontinuities</blockquote>
+
+<blockquote>In general, the derivative of $C^n$ fucntion is $C^{n-1}$ fucntion</blockquote>
+<hr />
+<h2 id="the-equivalence-between-the-weak-and-strong-forms">The equivalence between the weak and strong forms</h2>
+<p><strong>Key to the proof</strong>: The arbitrariness of the weight function <span class="arithmatex">\(w(x)\)</span></p>
+<p>The trial solution <span class="arithmatex">\(u(x)\)</span> that  satisfies the weak form satisfies the strong form</p>
+<hr />
+<h2 id="one-dimensional-stress-analysis-with-arbitary-boundary-conditions">One-dimensional stress analysis with arbitary boundary conditions</h2>
+<p><span class="arithmatex">\(\Gamma_u \cup \Gamma_t=\Gamma\)</span></p>
+<p>Any boudanry is either an essential boundary or a natural boundary and their union is the enire boundary</p>
+<p><span class="arithmatex">\(\Gamma_u \cap \Gamma_t=0\)</span></p>
+<p>Natural boundary conditions and essential boundary conditions cannot be applied at the same boundary points </p>
+<blockquote>P58 The two boundaries are said to be complementary</blockquote>
+
+<h3 id="strong-form-for-1d-stress-analysis">Strong form for 1D stress analysis</h3>
+<p><span class="arithmatex">\(\frac{d}{dx}(AE\frac{du}{dx})+b=0\)</span> on <span class="arithmatex">\(0&lt;x&lt;l\)</span>,</p>
+<p><span class="arithmatex">\(\sigma n=En\frac{du}{dx}=\overline{t}\)</span> on <span class="arithmatex">\(\Gamma_t\)</span>,</p>
+<p><span class="arithmatex">\(u=\overline{u}\)</span> on <span class="arithmatex">\(\Gamma_u\)</span></p>
+<p><blockquote><span class="arithmatex">\(n\)</span> -----&gt; the normal vector pointing outwards</blockquote></p>
+<h3 id="weak-form-for-1d-stress-analysis">Weak form for 1D stress analysis</h3>
+<p><span class="arithmatex">\(H^1\)</span> is a space of functions with square integrable derivatives and <span class="arithmatex">\(H^1 \subset C^0\)</span></p>
+<blockquote>P60 $H^1$ contains an infinite number of functions and is called an infinite set</blockquote>
+
+<p>Define two function spaces <span class="arithmatex">\(U\)</span> and <span class="arithmatex">\(U_0\)</span> :</p>
+<p><span class="arithmatex">\(U=\{u(x)|u(x) \in H^1, u=\overline{u}\)</span> on <span class="arithmatex">\(\Gamma_u\}\)</span></p>
+<p><span class="arithmatex">\(U_0=\{w(x)|w(x) \in H^1, w=0\)</span> on <span class="arithmatex">\(\Gamma_u\}\)</span></p>
+<p>Use the weight function <span class="arithmatex">\(w(x)\)</span>, the strong form becomes</p>
+<p><span class="arithmatex">\(\int_{\Omega}w(\frac{d}{dx}(AE\frac{du}{dx})+b)dx=0\)</span>, <span class="arithmatex">\(\forall w\)</span> ,</p>
+<p><span class="arithmatex">\((wA(\overline{t}-\sigma n))|_{\Gamma_t}=0\)</span>, <span class="arithmatex">\(\forall w\)</span></p>
+<p>For the boundary parts <span class="arithmatex">\(\Gamma\)</span> can be divided into <span class="arithmatex">\(\Gamma_t\)</span> and <span class="arithmatex">\(\Gamma_u\)</span> and <span class="arithmatex">\(w\)</span> vanishes on <span class="arithmatex">\(\Gamma_u\)</span></p>
+<p><span class="arithmatex">\(\int_{\Omega} w[\frac{d}{dx}(AE\frac{du}{dx})+b]dx=(wAE\frac{du}{dx}n)|_{\Gamma_u}+(wAE\frac{du}{dx}n)|_{\Gamma_t}-\int_{\Omega} \frac{dw}{dx}AE\frac{du}{dx}dx+\int_{\Omega}wbdx=0\)</span></p>
+<p>So, <span class="arithmatex">\(\int_{\Omega} \frac{dw}{dx}AE\frac{du}{dx}dx=(wA\overline{t})_{\Gamma_t}+\int_{\Omega}wbdx\)</span></p>
+<p>The weak form becomes</p>
+<p><span class="arithmatex">\(--------------------------\)</span></p>
+<p>Find <span class="arithmatex">\(u(x) \in U\)</span> such that</p>
+<p><span class="arithmatex">\(\int_{\Omega} \frac{dw}{dx}AE\frac{du}{dx}dx=(wA\overline{t})_{\Gamma_t}+\int_{\Omega}wbdx\)</span>, <span class="arithmatex">\(\forall w \in U_0\)</span></p>
+<p><span class="arithmatex">\(--------------------------\)</span></p>
+<hr />
+<h2 id="one-dimensional-heat-conduction-with-arbitary-boundary-conditions">One-dimensional heat conduction with arbitary boundary conditions</h2>
+<p>Similar with 1D stress analysis... </p>
+<hr />
+<h2 id="two-point-boundary-value-problems-wit-generalized-boundary-conditions">Two-point boundary value problems wit generalized boundary conditions</h2>
+<p>TWo-point boundary value problem:</p>
+<p><span class="arithmatex">\(\frac{\partial}{\partial x}(A\kappa \frac{\partial \theta}{\partial x})+f=0\)</span> on <span class="arithmatex">\(\Omega\)</span></p>
+<blockquote>Diffusion, heat conduction, elastic problems in this Chapter are all of the above form</blockquote>
+
+<p>Generalized boundary conditions:</p>
+<p><span class="arithmatex">\((\kappa n \frac{\partial \theta}{\partial x}-\overline{\Phi})+\beta(\theta-\overline{\theta})=0\)</span> on <span class="arithmatex">\(\Gamma_{\Phi}\)</span></p>
+<p>When <span class="arithmatex">\(\beta\)</span> is a penalty paramerter (large number), the essential boundary conditions become a limiting case of the equation above</p>
+<p>then <span class="arithmatex">\(\Gamma \equiv \Gamma_{\Phi}\)</span></p>
+<p>Two approches to deal with the boundary condition: <strong>Penalty method</strong> and <strong>Partition method</strong></p>
+<h3 id="strong-form-for-two-point-boundary-value-problems-with-generalized-boundary-conditions">Strong form for two-point boundary value problems with generalized boundary conditions</h3>
+<ul>
+<li>General strong form for 1D problems-penalty method</li>
+</ul>
+<p><span class="arithmatex">\(\frac{\partial}{\partial x}(A\kappa \frac{\partial \theta}{\partial x})+f=0\)</span> on <span class="arithmatex">\(\Omega\)</span></p>
+<p><span class="arithmatex">\((\kappa n \frac{\partial \theta}{\partial x}-\overline{\Phi})+\beta(\theta-\overline{\theta})=0\)</span> on <span class="arithmatex">\(\Gamma\)</span></p>
+<ul>
+<li>General strong form for 1D problems-partition method</li>
+</ul>
+<p><span class="arithmatex">\(\frac{\partial}{\partial x}(A\kappa \frac{\partial \theta}{\partial x})+f=0\)</span> on <span class="arithmatex">\(\Omega\)</span></p>
+<p><span class="arithmatex">\((\kappa n \frac{\partial \theta}{\partial x}-\overline{\Phi})+\beta(\theta-\overline{\theta})=0\)</span> on <span class="arithmatex">\(\Gamma_{\Phi}\)</span></p>
+<p><span class="arithmatex">\(\theta=\overline{\theta}\)</span> on <span class="arithmatex">\(\Gamma_{\theta}\)</span></p>
+<h3 id="weak-form-for-two-point-boundary-value-problems-with-generalized-boundary-conditions">Weak form for two-point boundary value problems with generalized boundary conditions</h3>
+<ul>
+<li>General weak form for 1D problems-penalty method</li>
+</ul>
+<p>Find <span class="arithmatex">\(\theta(x) \in H^1\)</span> such that</p>
+<p><span class="arithmatex">\(\int_{\Omega}\frac{dw}{dx}A\kappa\frac{d\theta}{dx}dx-\int_{\Omega}wfdx-wA(\overline{\Phi}-\beta(\theta-\overline{\theta}))|_{\Gamma}=0\)</span>, <span class="arithmatex">\(\forall w \in H^1\)</span></p>
+<ul>
+<li>General weak form for 1D problems-partition method</li>
+</ul>
+<p>Find <span class="arithmatex">\(\theta(x) \in U\)</span> such that</p>
+<p><span class="arithmatex">\(\int_{\Omega}\frac{dw}{dx}A\kappa\frac{d\theta}{dx}dx-\int_{\Omega}wfdx-wA(\overline{\Phi}-\beta(\theta-\overline{\theta}))|_{\Gamma_{\overline{\Phi}}}=0\)</span>, <span class="arithmatex">\(\forall w \in U_0\)</span></p>
+<hr />
+<h2 id="advection-diffusion-1d">Advection-diffusion (1D)</h2>
+<p>Conservation principle: the species (material ,energy or state) is conserved in each volume <span class="arithmatex">\(\Delta x\)</span></p>
+<p>i.e. the amount of species entering minus the amount of leaving equals the amount produced</p>
+<p><strong>Notation</strong>:</p>
+<p>Concentration of species: <span class="arithmatex">\(\theta(x)\)</span></p>
+<p>Cross section area: <span class="arithmatex">\(A(x)\)</span></p>
+<p>Velocity of the fluid: <span class="arithmatex">\(v(x)\)</span></p>
+<p>Source: <span class="arithmatex">\(s(x)\)</span></p>
+<p>control volume: <span class="arithmatex">\(\Delta x\)</span></p>
+<h3 id="strong-form-of-advection-diffusion-equation">Strong form of advection-diffusion equation</h3>
+<p>From the conervation principle</p>
+<p><span class="arithmatex">\((Av\theta)_x+(Aq)_x-(Av\theta)_{x+\Delta x}-(Aq)_{x+\Delta x}+s(x+\frac{\Delta x}{2})\Delta x=0\)</span></p>
+<p>Take the limit <span class="arithmatex">\(\Delta x \rightarrow 0\)</span></p>
+<p><span class="arithmatex">\(\frac{d (Av\theta)}{d x}+\frac{d (Aq)}{d x}-s=0\)</span></p>
+<p>For an incompressible flow, the volume of material entering the control volume equals the volume leaving.</p>
+<p><span class="arithmatex">\((Av)_x=(Av)_{x+\Delta x}\)</span></p>
+<p>Take the limit <span class="arithmatex">\(\Delta x \rightarrow 0\)</span></p>
+<p><span class="arithmatex">\(\frac{d (Av)}{d x}=0\)</span></p>
+<p>So the governing equation becomes</p>
+<p><span class="arithmatex">\(\frac{d (Av\theta)}{d x}+\frac{d (Aq)}{d x}-s=\theta \frac{d (Av)}{d x}+Av\frac{d \theta}{dx}+\frac{d (Aq)}{d x}-s=0\)</span></p>
+<p><span class="arithmatex">\(Av\frac{d \theta}{dx}+\frac{d (Aq)}{d x}-s=0\)</span></p>
+<p>Assume the diffusion is linear and use the Fick's first law</p>
+<p><span class="arithmatex">\(q=-k\frac{d\theta}{dx}\)</span></p>
+<p>Then the advection-diffusion equation is as follows</p>
+<p><span class="arithmatex">\(\underbrace{Av\frac{d \theta}{dx}}_{advection}-\underbrace{\frac{d}{dx}(Ak\frac{d\theta}{dx})}_{Diffusion}-\underbrace{s}_{Source}=0\)</span></p>
+<p>With the boundary conditions</p>
+<p><span class="arithmatex">\(\theta=\overline{\theta}\)</span> on <span class="arithmatex">\(\Gamma_{\theta}\)</span></p>
+<p><span class="arithmatex">\(qn=-k\frac{d\theta}{dx}n=\overline{q}\)</span> on <span class="arithmatex">\(\Gamma_q\)</span></p>
+<h3 id="weak-form-of-advection-diffusion-equation">Weak form of advection-diffusion equation</h3>
+<p>Multipy the governing eqaution and intergrate over the domain</p>
+<p>Intergrate the diffusion term by parts, we can get the weak form:</p>
+<p>Find <span class="arithmatex">\(\theta(x)\in U\)</span> such that</p>
+<p><span class="arithmatex">\(\int_{\Omega}wAv(\frac{d\theta}{dx})dx+\int_{\Omega}\frac{dw}{dx}Ak\frac{d\theta}{dx}dx-\int_{\Omega}wsdx+(wA\overline{q})|_{\Gamma_q}=0\)</span> for <span class="arithmatex">\(\forall w \in U_0\)</span></p>
+<p>Instead of using the flux boundary condition (natural) above, follow generalized boundary condition can be used</p>
+<p><span class="arithmatex">\((-k\frac{d\theta}{dx}+v\theta)n=\overline{q}_T\)</span></p>
+<p>Then integrate the first term by parts in the above weak form, we can get</p>
+<p><span class="arithmatex">\(-\int_{\Omega}\frac{dw}{dx}Av\theta dx+\int_{\Omega}\frac{dw}{dx}Ak\frac{d\theta}{dx}dx-\int_{\Omega}wsdx+(wA\overline{q}_T)|_{\Gamma_q}=0\)</span> </p>
+<p>... ...</p>
+<hr />
+<h2 id="minimum-potential-energy">Minimum potential energy</h2>
+<h3 id="theorem-of-minimum-potential-energy">Theorem of minimum potential energy</h3>
+<p><span class="arithmatex">\(------------------------\)</span></p>
+<p>The solution of the strong from is the minimizer of</p>
+<p><span class="arithmatex">\(W(u(x))=\underbrace{\frac{1}{2}\int_{\Omega}AE(\frac{du}{dx})^2dx}_{W_{int}}-\underbrace{(\int_{\Omega}ubdx+(uA\overline{t})|_{\Gamma_t})}_{W_{ext}}\)</span></p>
+<p><span class="arithmatex">\(------------------------\)</span></p>
+<p>Potential energy of the system : <span class="arithmatex">\(W(u(x))\)</span> -----&gt; functional (function of function)</p>
+<p><strong>The physical meaning</strong>: </p>
+<p>The solution is minimizer (a stationary point) of the potential energy <span class="arithmatex">\(W\)</span> among all admissible displacement functions</p>
+<p><strong>Proof of equivalence</strong>:</p>
+<p>A variation of the function <span class="arithmatex">\(u(x)\)</span> : <span class="arithmatex">\(\delta u(x) \equiv \zeta w(x)\)</span></p>
+<p>where <span class="arithmatex">\(w(x)\)</span> is an arbitary function and <span class="arithmatex">\(0&lt;\zeta\ll1\)</span></p>
+<p>Variation in the functional : <span class="arithmatex">\(\delta W=W(u(x)+\zeta w(x))-W(u(x))\equiv W(u(x)+\delta u(x))-W(u(x))\)</span></p>
+<p>For <span class="arithmatex">\((U(x)+\zeta w(x)) \in U\)</span>, <span class="arithmatex">\(w(x)\)</span> must vanish on the essential boundary, <span class="arithmatex">\(w(x)\in U_0\)</span></p>
+<p>Variation of in the internal and external work</p>
+<p><span class="arithmatex">\(\delta W_{int}=\frac{1}{2}\int_{\Omega}AE(\frac{du}{dx}+\zeta\frac{dw}{dx})^2dx-\frac{1}{2}\int_{\Omega}AE(\frac{du}{dx})^2dx=\zeta\int_{\Omega}AE(\frac{du}{dx})(\frac{dw}{dx})dx\)</span></p>
+<p><span class="arithmatex">\(\delta W_{ext}=\delta W_{ext}^{\Omega}+\delta W_{ext}^{\Gamma}=\int_{\Omega}(u+\zeta w)bdx-\int_{\Omega}(u)bdx+(u+\zeta w)A\overline{t}|_{\Gamma_t}-(u\overline{t})A|_{\Gamma_t}=\zeta(\int_{\Omega}wbdx+(wA\overline{t})|_{\Gamma_t})\)</span></p>
+<p>At the minimum of <span class="arithmatex">\(W(u(x))\)</span>, there should be <span class="arithmatex">\(\delta W=\delta W_{int}-\delta W_{ext}=0\)</span></p>
+<p>So we can get the follwoing statement</p>
+<p>Find <span class="arithmatex">\(u\in U\)</span> such that</p>
+<p><span class="arithmatex">\(\frac{\delta W}{\zeta}=\int_{\Omega}AE(\frac{du}{dx})(\frac{dw}{dx})dx-\int_{\Omega}wbdx-(wA\overline{t})|_{\Gamma_t}=0\)</span> , <span class="arithmatex">\(w\in U_0\)</span></p>
+<p>Alternatively, use the <span class="arithmatex">\(\delta u\)</span> to replace the <span class="arithmatex">\(\zeta w\)</span>, i.e.</p>
+<p>Find <span class="arithmatex">\(u\in U\)</span> such that</p>
+<p><span class="arithmatex">\(\delta W=\int_{\Omega}AE(\frac{du}{dx})(\frac{d(\delta u)}{dx})dx-\int_{\Omega}\delta u bdx-(\delta u A\overline{t})|_{\Gamma_t}=0\)</span> , <span class="arithmatex">\(w\in U_0\)</span></p>
+<p>The minimizer of the potential energy functional &lt;--------&gt; The weak form &lt;--------&gt; The strong form</p>
+<h3 id="principle-of-virtual-work">Principle of virtual work</h3>
+<p>Use the strain-displacement equation and the stress-strain law</p>
+<p><span class="arithmatex">\(\delta W=\underbrace{\int_{\Omega}A\sigma\delta \varepsilon dx}_{\delta W_{int}}-\underbrace{\int_{\Omega}b\delta udx-(\overline{t}A\delta u)|_{\Gamma_t}}_{\delta W_{ext}}=0\)</span></p>
+<p>So  <strong>the principle of virtual work</strong> can be stated as follows:</p>
+<p>The admissible displacement field (<span class="arithmatex">\(u\in U\)</span>) for which the variational in the internal work <span class="arithmatex">\(\delta W_{int}\)</span> equals the variation in the external work <span class="arithmatex">\(\delta W_{ext}\)</span> for <span class="arithmatex">\(\forall \delta u\in U_0\)</span> satisfies equilibrium and boundary conditions.</p>
+<p><span class="arithmatex">\(W_{int}=\int_{\Omega}w_{int}Adx=\frac{1}{2}\int_{\Omega}AE\varepsilon^2dx\)</span></p>
+<p>where <span class="arithmatex">\(w_{int}\)</span> is the energy per volume called <strong>energy density</strong></p>
+<blockquote>Some weak forms can be converted to variational principles</blockquote>
+
+<blockquote>The potential energy theorem holds for any elastic system and the similar variational principle can be formulated for heat conduction</blockquote>
+
+<blockquote>Variational principles can only be developed for systems that are self-adjoint</blockquote>
+
+<hr />
+<h2 id="integrability">Integrability</h2>
+<p><strong>Integrability</strong> for the weak form : </p>
+<p>The integrals in the weak form can be evaluated, which requires the smoothness of the trial solution and weight function</p>
+<p>A derivative of a function <span class="arithmatex">\(u(x)\)</span> is called <strong>square integrable</strong> if <span class="arithmatex">\(W_{int}(\theta)\)</span> is bounded (<span class="arithmatex">\(W_{int}(\theta)&lt;\infty\)</span>)</p>
+<p><span class="arithmatex">\(W_{int}(\theta)=\frac{1}{2}\int_{\Omega}\kappa A(\frac{d\theta}{dx})^2dx\)</span></p>
+<p><strong>The required smoothness in FEM</strong>: The weight and trial functions are required to posses <strong>square integrable derivatives</strong></p>
+<p>In elasticity, <span class="arithmatex">\(W_{int}(\theta)\)</span> corresponds to the strain energy</p>
+<blockquote>The value of $\sqrt{W_{int}(\theta)}$ is often called an energy norm</blockquote>
+
+<blockquote>The notions of required smoothness also have a physical basis (Compatibility of the displacement field, no gaps or overlaps...)</blockquote>
+
+<blockquote>$C^0$ continuity is enough for the weight and trial functions</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.indexes", "navigation.top", "navigation.tracking", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../assets/javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
