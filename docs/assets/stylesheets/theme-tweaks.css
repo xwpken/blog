@@ -1,0 +1,59 @@
+/* Force a persistent vertical scrollbar to prevent horizontal layout shift */
+html,
+body {
+  overflow-y: scroll !important;
+}
+
+/* Keep the sidebar scrollbar visible instead of appearing only on hover/overflow changes */
+.md-sidebar__scrollwrap {
+  overflow-y: scroll !important;
+  scrollbar-width: thin;
+  scrollbar-color: var(--md-primary-fg-color) transparent;
+}
+
+.md-sidebar__scrollwrap::-webkit-scrollbar {
+  width: 8px;
+}
+
+.md-sidebar__scrollwrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
+  background-color: var(--md-primary-fg-color);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Slightly stronger hierarchy in sidebar */
+.md-nav__item .md-nav__link {
+  font-weight: 500;
+}
+
+.md-nav__item--nested > .md-nav__link {
+  letter-spacing: 0.01em;
+}
+
+/* Better heading rhythm */
+.md-typeset h1 {
+  margin-bottom: 0.6em;
+}
+
+.md-typeset h2 {
+  margin-top: 1.8em;
+}
+
+/* Make markdown blockquotes visually explicit */
+.md-typeset blockquote {
+  margin: 1rem 0;
+  padding: 0.6rem 1rem;
+  border-left: 0.2rem solid var(--md-primary-fg-color);
+  background: var(--md-code-bg-color);
+  border-radius: 0.2rem;
+}
+
+/* Cleaner code block look */
+.md-typeset pre > code {
+  border-radius: 0.5rem;
+}

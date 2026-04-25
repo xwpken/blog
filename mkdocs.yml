@@ -1,0 +1,85 @@
+site_name: Computational Mechanics Notes
+site_author: Weipeng
+
+nav:
+  - Welcome: index.md
+  - Finite Element Method:
+      - First Course (2007):
+          - About: fem/2007_jacob_fish/About.md
+          - Chapter 2: fem/2007_jacob_fish/Fish_FEM_1.md
+          - Chapter 3: fem/2007_jacob_fish/Fish_FEM_2.md
+          - Chapter 4: fem/2007_jacob_fish/Fish_FEM_3.md
+          - Chapter 5: fem/2007_jacob_fish/Fish_FEM_4.md
+          - Chapter 6: fem/2007_jacob_fish/Fish_FEM_5.md
+          - Chapter 7: fem/2007_jacob_fish/Fish_FEM_6.md
+  - Differential Equation:
+      - Python ODE (2024):
+          - About: de/python_ode/About.md
+          - Chapter 1 Programming a Simple ODE Solver: de/python_ode/Chapter 1 Programming a Simple ODE Solver.ipynb
+          - Chapter 2 Improving the Accuracy: de/python_ode/Chapter 2 Improving the Accuracy.ipynb
+          - Chapter 3 Stable Solvers for Stiff ODE Systems: de/python_ode/Chapter 3 Stable Solvers for Stiff ODE Systems.ipynb
+          - Chapter 4 Adaptive Time Step Methods: de/python_ode/Chapter 4 Adaptive Time Step Methods.ipynb
+          - Chapter 5 Modeling Infectious Diseases: de/python_ode/Chapter 5 Modeling Infectious Diseases.ipynb
+          - Appendix: de/python_ode/Appendix.ipynb
+  - Miscellaneous:
+      - Chen's book (in Chinese): misc/elasticity_plasticity_chen.md
+      - Eigenchris (incomplete): misc/tensor_eigenchris.md
+
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/book-open-page-variant
+  font:
+    text: Noto Sans
+    code: JetBrains Mono
+  palette:
+    - scheme: default
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.tracking
+    - toc.follow
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search
+  - mkdocs-jupyter:
+      execute: false
+
+extra_javascript:
+  - assets/javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - assets/stylesheets/math.css
+  - assets/stylesheets/theme-tweaks.css
