@@ -1,53 +1,78 @@
-site_name: Computational Mechanics Notes
-site_author: Weipeng
+site_name: Learn to compute
+site_author: Weipeng Xu
 
 nav:
-  - Welcome: index.md
+  - Home: index.md
   - Finite Element Method:
-      - First Course (2007):
-          - About: fem/2007_jacob_fish/About.md
-          - Chapter 2: fem/2007_jacob_fish/Fish_FEM_1.md
-          - Chapter 3: fem/2007_jacob_fish/Fish_FEM_2.md
-          - Chapter 4: fem/2007_jacob_fish/Fish_FEM_3.md
-          - Chapter 5: fem/2007_jacob_fish/Fish_FEM_4.md
-          - Chapter 6: fem/2007_jacob_fish/Fish_FEM_5.md
-          - Chapter 7: fem/2007_jacob_fish/Fish_FEM_6.md
-  - Differential Equation:
-      - Python ODE (2024):
-          - About: de/python_ode/About.md
-          - Chapter 1 Programming a Simple ODE Solver: de/python_ode/Chapter 1 Programming a Simple ODE Solver.ipynb
-          - Chapter 2 Improving the Accuracy: de/python_ode/Chapter 2 Improving the Accuracy.ipynb
-          - Chapter 3 Stable Solvers for Stiff ODE Systems: de/python_ode/Chapter 3 Stable Solvers for Stiff ODE Systems.ipynb
-          - Chapter 4 Adaptive Time Step Methods: de/python_ode/Chapter 4 Adaptive Time Step Methods.ipynb
-          - Chapter 5 Modeling Infectious Diseases: de/python_ode/Chapter 5 Modeling Infectious Diseases.ipynb
-          - Appendix: de/python_ode/Appendix.ipynb
+      - Overview: fem/index.md
+      - Book notes:
+          - A First Course in Finite Elements (2007):
+              - fem/2007_jacob_fish/index.md
+              - Chapter 2: fem/2007_jacob_fish/Fish_FEM_1.md
+              - Chapter 3: fem/2007_jacob_fish/Fish_FEM_2.md
+              - Chapter 4: fem/2007_jacob_fish/Fish_FEM_3.md
+              - Chapter 5: fem/2007_jacob_fish/Fish_FEM_4.md
+              - Chapter 6: fem/2007_jacob_fish/Fish_FEM_5.md
+              - Chapter 7: fem/2007_jacob_fish/Fish_FEM_6.md
+          - Introduction to Nonlinear Finite Element Analysis (2015):
+              - fem/2015_kim/index.md
+              - Chapter 1:
+                  - Section 1.2: fem/2015_kim/NLFEM_KIM_1.2.md
+                  - Section 1.3: fem/2015_kim/NLFEM_KIM_1.3.md
+                  - Section 1.4: fem/2015_kim/NLFEM_KIM_1.4.md
+                  - Section 1.5: fem/2015_kim/NLFEM_KIM_1.5.md
+              - Chapter 2: fem/2015_kim/NLFEM_KIM_2.md
+              - Chapter 3:
+                  - Section 3.1: fem/2015_kim/NLFEM_KIM_3.1.md
+  - Artificial Intelligence:
+      - Overview: ai/index.md
+      - Generative models:
+          - Calvin Luo (2022): ai/unified_diffusion.md
   - Miscellaneous:
-      - Chen's book (in Chinese): misc/elasticity_plasticity_chen.md
-      - Eigenchris (incomplete): misc/tensor_eigenchris.md
+      - Overview: misc/index.md
+      - Differential equations:
+          - Python ODE (2024):
+              - misc/python_ode/index.md
+              - Chapter 1: misc/python_ode/pyode_ch1.ipynb
+              - Chapter 2: misc/python_ode/pyode_ch2.ipynb
+              - Chapter 3: misc/python_ode/pyode_ch3.ipynb
+              - Chapter 4: misc/python_ode/pyode_ch4.ipynb
+              - Chapter 5: misc/python_ode/pyode_ch5.ipynb
+              - Appendix: misc/python_ode/pyode_appendix.ipynb
+      - Continuum mechanics:
+          - Elasticity and Plasticity (2007):
+              - Overview: misc/chen/index.md
+              - Chapter 1: misc/chen/01_stress.md
+              - Chapter 2: misc/chen/02_strain.md
+          - Kinematics — Bonet, Gil & Wood (2016) (incomplete): misc/kinematics_bonet.md
+          - Vectors and Tensors — Holzapfel (2002) (incomplete): misc/tensor_holzapfel.md
+          - Eigenchris (incomplete): misc/tensor_eigenchris.md
 
 theme:
   name: material
   language: en
-  icon:
-    logo: material/book-open-page-variant
+  # no custom logo — show title text only
+  favicon: assets/images/favicon.svg
+  logo: assets/images/logo.svg
   font:
     text: Noto Sans
     code: JetBrains Mono
   palette:
-    - scheme: default
-      primary: teal
-      accent: amber
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
     - scheme: slate
-      primary: teal
-      accent: amber
+      primary: blue grey
+      accent: red
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
   features:
-    - navigation.sections
+    - navigation.tabs
+    - navigation.path
     - navigation.indexes
     - navigation.top
     - navigation.tracking
@@ -61,6 +86,9 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.superfences
@@ -75,10 +103,11 @@ plugins:
   - search
   - mkdocs-jupyter:
       execute: false
+      ignore_h1_titles: true
 
 extra_javascript:
   - assets/javascripts/mathjax.js
-  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/mathjax@3.2.2/es5/tex-chtml-full.js
 
 extra_css:
   - assets/stylesheets/math.css

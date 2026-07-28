@@ -12,6 +12,7 @@ window.MathJax = {
 };
 
 var mathTypesetScheduled = false;
+var mathIsTypesetting = false;
 
 function withMathJaxReady(callback, retries) {
   var remaining = typeof retries === "number" ? retries : 60;
@@ -32,7 +33,11 @@ function withMathJaxReady(callback, retries) {
 
 function typesetMathNow() {
   withMathJaxReady(function () {
-    window.MathJax.typesetPromise();
+    if (mathIsTypesetting) return;
+    mathIsTypesetting = true;
+    window.MathJax.typesetPromise()["finally"](function () {
+      mathIsTypesetting = false;
+    });
   });
 }
 
@@ -63,6 +68,7 @@ window.addEventListener("load", scheduleTypesetBurst);
 
 if (typeof MutationObserver !== "undefined") {
   var observer = new MutationObserver(function () {
+    if (mathIsTypesetting) return;
     scheduleTypesetMath();
   });
 
