@@ -80,9 +80,9 @@ with the components as $\varepsilon_{i j} = \frac{1}{2} (u_{i,j} + u_{j,i})$. Th
 The Cauchy's Lemma, decomposition, and principal directions/strains for the strain tensor are similar to those for the stress tensor. For example, the volumetric strain is defined as $\varepsilon_v = \varepsilon_{kk}$ and the deviatoric strain can be obtained via $\boldsymbol{e} = \mathbb{I}_{\text{dev}} : \boldsymbol{\varepsilon}$.   
 
 ## 1.3.3 Stress-Strain Relationship
-<!-- ![Stress–strain diagram for a typical ductile material in tension](pic/1.11.png) -->
-<figure style="text-align: center;">
-  <img src="./pic/1.11.png" width="80%">
+
+<figure markdown="span">
+  ![Stress–strain diagram for a typical ductile material in tension](pic/1.11.png){ width="80%" }
   <figcaption>Stress–strain diagram for a typical ductile material in tension</figcaption>
 </figure>
 The stress-strain relationship for a general linear elastic material can be expressed as:

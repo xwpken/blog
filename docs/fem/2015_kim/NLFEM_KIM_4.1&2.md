@@ -15,8 +15,8 @@ The plastic deformation of **metals** normally occurs at **0.2%** strain, which 
 
 ### 4.2.1 Elastoplastic Material Behavior
 
-<figure style="text-align: center;">
-  <img src="./pic/4.1.png" width="100%">
+<figure markdown="span">
+  ![Hardening models for elastoplasticity](pic/4.1.png){ width="100%" }
   <figcaption>Hardening models for elastoplasticity. a. Kinematic hardening. b. Isotropic hardening</figcaption>
 </figure>
 

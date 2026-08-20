@@ -110,8 +110,8 @@ $$
 which corresponds a circular cylinder in the principal deviatoric stress space.
 
 
-<figure style="text-align: center;">
-  <img src="./pic/4.11.png" width="50%">
+<figure markdown="span">
+  ![Von Mises yield criterion](pic/4.11.png){ width="50%" }
   <figcaption>Von Mises yield criterion</figcaption>
 </figure>
 
@@ -127,8 +127,8 @@ Relative sliding of the atomic layers (a permanent shape change without changing
 * **Strain softening**: yield stress decreases as plastic deformation increases (geotechnical materials).
 
 
-<figure style="text-align: center;">
-  <img src="./pic/4.13.png" width="50%">
+<figure markdown="span">
+  ![Post-plastic behaviors of materials](pic/4.13.png){ width="50%" }
   <figcaption>Post-plastic behaviors of materials</figcaption>
 </figure>
 
@@ -358,8 +358,8 @@ $$
 \cos\theta = \frac{\frac{\partial f}{\partial\boldsymbol{\sigma}}:\mathbb{D}:\dot{\boldsymbol{\varepsilon}}}{\Vert\frac{\partial f}{\partial\boldsymbol{\sigma}}\Vert\cdot\Vert\mathbb{D}:\dot{\boldsymbol{\varepsilon}}\Vert} > 0
 $$
 
-<figure style="text-align: center;">
-  <img src="./pic/4.15.png" width="50%">
+<figure markdown="span">
+  ![Angle between elastic trial stress and normal to the yield surface](pic/4.15.png){ width="50%" }
   <figcaption>Angle between elastic trial stress and normal to the yield surface</figcaption>
 </figure>
 
@@ -408,8 +408,8 @@ $$
 \boldsymbol{s}^{n+1} = \boldsymbol{s}^{\text{tr}}, \quad \boldsymbol{\alpha}^{n+1} = \boldsymbol{\alpha}^{\text{tr}}, \quad e_p^{n+1} = e_p^{\text{tr}}
 $$
 
-<figure style="text-align: center;">
-  <img src="./pic/4.16.png" width="60%">
+<figure markdown="span">
+  ![Return-mapping of isotropic elastoplasticity](pic/4.16.png){ width="60%" }
   <figcaption>Return-mapping of isotropic elastoplasticity</figcaption>
 </figure>
 
