@@ -31,3 +31,8 @@
 ### Chapter 3 Element Analysis for Nonlinear Elastic Systems
 
 - [3.1 Introduction](NLFEM_KIM_3.1.md)
+
+### Chapter 4 Finite Element Analysis for Elastoplastic Problems
+
+- [4.1 & 4.2: Introduction and One-Dimensional Elastoplasticity](NLFEM_KIM_4.1&2.md)
+- [4.3 Multi-dimensional Elastoplasticity](NLFEM_KIM_4.3.md)
