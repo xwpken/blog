@@ -1,0 +1,3307 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Weipeng Xu">
+      
+      
+      
+        <link rel="prev" href="../NLFEM_KIM_4.1%262/">
+      
+      
+        <link rel="next" href="../../../ai/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Section 4.3 - Learn to compute</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/math.css">
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/theme-tweaks.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-4-element-analysis-for-elastoplastic-problems" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Learn to compute" class="md-header__button md-logo" aria-label="Learn to compute" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learn to compute
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Section 4.3
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Finite Element Method
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../misc/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Miscellaneous
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Learn to compute" class="md-nav__button md-logo" aria-label="Learn to compute" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo.svg" alt="logo">
+
+    </a>
+    Learn to compute
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finite Element Method
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Finite Element Method
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Book notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Book notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../2007_jacob_fish/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A First Course in Finite Elements (2007)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    A First Course in Finite Elements (2007)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 7
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to Nonlinear Finite Element Analysis (2015)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introduction to Nonlinear Finite Element Analysis (2015)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2_2" id="__nav_2_2_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLFEM_KIM_1.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 1.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLFEM_KIM_1.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 1.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLFEM_KIM_1.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 1.4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLFEM_KIM_1.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 1.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLFEM_KIM_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2_4" id="__nav_2_2_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLFEM_KIM_3.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 3.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2_5" id="__nav_2_2_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 4
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLFEM_KIM_4.1%262/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sections 4.1 & 4.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 4.3
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 4.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#43-multi-dimensional-elastoplasticity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Multi-dimensional Elastoplasticity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Multi-dimensional Elastoplasticity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-yield-functions-and-yield-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1 Yield Functions and Yield Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.1 Yield Functions and Yield Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maximum-shear-stress-criterion-tresca-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maximum shear stress criterion (Tresca criterion)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distortion-energy-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distortion energy criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-von-mises-yield-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2 Von Mises Yield Criterion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433-hardening-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3 Hardening Models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.3 Hardening Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isotropic-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Isotropic hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kinematic-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kinematic hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combined-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combined hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#434-classical-elastoplasticity-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.4 Classical Elastoplasticity Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.4 Classical Elastoplasticity Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-additive-decomposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Additive Decomposition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-strain-energy-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Strain Energy Density
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-yield-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Yield Function
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-associative-flow-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Associative Flow Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-plastic-consistency-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Plastic Consistency Parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-elastoplastic-tangent-stiffness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Elastoplastic Tangent stiffness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#435-numerical-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.5 Numerical Integration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.5 Numerical Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-return-mapping-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Return-Mapping Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-updating-stress-and-plastic-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Updating Stress and Plastic Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-consistent-tangent-stiffness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3, Consistent Tangent Stiffness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-incremental-equations-for-elastoplasticity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Incremental Equations for Elastoplasticity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#436-computational-implementation-of-elastoplasticity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.6 Computational Implementation of Elastoplasticity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../ai/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Artificial Intelligence
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Artificial Intelligence
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generative models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generative models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ai/unified_diffusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calvin Luo (2022)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../misc/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Miscellaneous
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Miscellaneous
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differential equations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Differential equations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../misc/python_ode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python ODE (2024)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python ODE (2024)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_ch1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_ch2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_ch3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_ch4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_ch5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Continuum mechanics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Continuum mechanics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../misc/chen/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elasticity and Plasticity (2007)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_3_1" id="__nav_4_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Elasticity and Plasticity (2007)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/chen/01_stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/chen/02_strain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/kinematics_bonet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kinematics — Bonet, Gil & Wood (2016) (incomplete)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/tensor_holzapfel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vectors and Tensors — Holzapfel (2002) (incomplete)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/tensor_eigenchris/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eigenchris (incomplete)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#43-multi-dimensional-elastoplasticity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Multi-dimensional Elastoplasticity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Multi-dimensional Elastoplasticity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-yield-functions-and-yield-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1 Yield Functions and Yield Criteria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.1 Yield Functions and Yield Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maximum-shear-stress-criterion-tresca-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maximum shear stress criterion (Tresca criterion)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distortion-energy-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distortion energy criteria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-von-mises-yield-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2 Von Mises Yield Criterion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433-hardening-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3 Hardening Models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.3 Hardening Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isotropic-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Isotropic hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kinematic-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kinematic hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combined-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combined hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#434-classical-elastoplasticity-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.4 Classical Elastoplasticity Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.4 Classical Elastoplasticity Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-additive-decomposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Additive Decomposition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-strain-energy-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Strain Energy Density
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-yield-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Yield Function
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-associative-flow-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Associative Flow Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-plastic-consistency-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Plastic Consistency Parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-elastoplastic-tangent-stiffness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Elastoplastic Tangent stiffness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#435-numerical-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.5 Numerical Integration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.5 Numerical Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-return-mapping-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Return-Mapping Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-updating-stress-and-plastic-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Updating Stress and Plastic Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-consistent-tangent-stiffness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3, Consistent Tangent Stiffness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-incremental-equations-for-elastoplasticity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Incremental Equations for Elastoplasticity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#436-computational-implementation-of-elastoplasticity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.6 Computational Implementation of Elastoplasticity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Finite Element Method
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../2007_jacob_fish/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Book notes
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Introduction to Nonlinear Finite Element Analysis (2015)
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../NLFEM_KIM_4.1%262/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="chapter-4-element-analysis-for-elastoplastic-problems">Chapter 4 Element Analysis for Elastoplastic Problems</h1>
+<blockquote>
+<p>Last updated: 16 Aug 2026 </p>
+</blockquote>
+<h2 id="43-multi-dimensional-elastoplasticity">4.3 Multi-dimensional Elastoplasticity</h2>
+<h3 id="431-yield-functions-and-yield-criteria">4.3.1 Yield Functions and Yield Criteria</h3>
+<h4 id="maximum-shear-stress-criterion-tresca-criterion">Maximum shear stress criterion (Tresca criterion)</h4>
+<p>The <strong>maximum shear stress</strong> can be defined with the three <strong>principal stresses</strong> <span class="arithmatex">\(\sigma_1\geq\sigma_2\geq\sigma_3\)</span> as follows:</p>
+<div class="arithmatex">\[
+\tau_{\text{max}} = \frac{\sigma_1 - \sigma_3}{2}
+\]</div>
+<p>This criterion assumes that material failure occurs when <span class="arithmatex">\(\tau_{\text{max}}\)</span> is equal to the shear stress in a tensile specimen at yield (i.e., <span class="arithmatex">\(\sigma_{1} = \sigma_y\)</span> and <span class="arithmatex">\(\sigma_{2}=\sigma_{3} = 0\)</span>), leading to the following yield condition:</p>
+<div class="arithmatex">\[
+f(\boldsymbol{\sigma}) = \tau_{\text{max}} - \tau_y = \tau_{\text{max}} - \frac{1}{2}\sigma_y = 0
+\]</div>
+<h4 id="distortion-energy-criteria">Distortion energy criteria</h4>
+<p>The concept of <strong>distortion energy criterion</strong> is to compare the distortion energy of a multi-dimensional stress state to that of a tensile test at yield.</p>
+<p>The deviatoric stress and strain tensors are defined as follows:</p>
+<div class="arithmatex">\[
+\begin{align*}
+&amp;\boldsymbol{s}\equiv\boldsymbol{\sigma}-\sigma_m\boldsymbol{I} = \mathbb{I}_{\text{dev}}:\boldsymbol{\sigma},\\ 
+&amp;\boldsymbol{e}\equiv\boldsymbol{\varepsilon}-\varepsilon_m\boldsymbol{I}=\mathbb{I}_{\text{dev}}:\boldsymbol{\varepsilon},
+\end{align*}
+\]</div>
+<p>where <span class="arithmatex">\(\mathbb{I}_{\text{dev}}\)</span> is the fourth-order unit deviatoric tensor. <span class="arithmatex">\(\sigma_m=\frac{1}{3}\operatorname{tr}(\boldsymbol{\sigma})\)</span> and <span class="arithmatex">\(\varepsilon_m=\frac{1}{3}\operatorname{tr}(\boldsymbol{\varepsilon})\)</span> are the mean stress and mean strain, respectively. </p>
+<p>For isotropic and linear elastic materials, the constitutive relation between the stress and strain can be written as:</p>
+<div class="arithmatex">\[
+\begin{align*}
+    \boldsymbol{\sigma} &amp;= [\lambda\boldsymbol{I} \otimes \boldsymbol{I} + 2 \mu \mathbb{I}] : \boldsymbol{\varepsilon} = \mathbb{D}:\boldsymbol{\varepsilon}\\
+    &amp;=\lambda\operatorname{tr}(\boldsymbol{\varepsilon})\boldsymbol{I} + 2 \mu \boldsymbol{\varepsilon} \\
+    &amp;= (3\lambda)\varepsilon_m\boldsymbol{I} + 2 \mu(\boldsymbol{e} + \varepsilon_m\boldsymbol{I})\\
+    &amp;= (3\lambda + 2\mu)\varepsilon_m\boldsymbol{I} + 2 \mu \boldsymbol{e} \\
+    &amp;= \sigma_m\boldsymbol{I} + \boldsymbol{s}
+\end{align*}
+\]</div>
+<p>where <span class="arithmatex">\(\sigma_m = (3\lambda + 2\mu)\varepsilon_m=3K\varepsilon_m\)</span> and <span class="arithmatex">\(\boldsymbol{s} = 2 \mu \boldsymbol{e}\)</span>.</p>
+<p>The distortion energy density can be defined as:</p>
+<div class="arithmatex">\[
+U_d = \frac{1}{2}\boldsymbol{s}:\boldsymbol{e} = \frac{1}{2}\boldsymbol{s}:\frac{\boldsymbol{s}}{2\mu} = \frac{1}{4\mu}\boldsymbol{s}:\boldsymbol{s}
+\]</div>
+<p>In the case of a one-dimensional tensile test (i.e., <span class="arithmatex">\(\sigma_1 = \sigma_y\)</span> and <span class="arithmatex">\(\sigma_2=\sigma_3 = 0\)</span>), the distortion energy density at yield can be expressed as:</p>
+<div class="arithmatex">\[
+U_{d,\text{1D}} = \frac{1}{4\mu}\left(\frac{4}{9}\sigma_y^2 + \frac{1}{9}\sigma_y^2 + \frac{1}{9}\sigma_y^2\right) = \frac{1}{6\mu}\sigma_y^2
+\]</div>
+<p>With the above two equations, we can derive the following equivalent stress or <strong>Von Mises stress</strong> <span class="arithmatex">\(\sigma_e\)</span> as:</p>
+<div class="arithmatex">\[
+\sigma_e = \sqrt{\frac{3}{2}\boldsymbol{s}:\boldsymbol{s}} = \sigma_y
+\]</div>
+<p>The counterpart of the equivalent stress is the effective strain <span class="arithmatex">\(\varepsilon_e\)</span>:</p>
+<div class="arithmatex">\[
+\begin{align*}
+U_d &amp;= \frac{1}{2}\boldsymbol{s}:\boldsymbol{e} = \frac{1}{2}\sigma_ee_e\\
+&amp;=\frac{1}{4\mu}\boldsymbol{s}:\boldsymbol{s} = \frac{1}{4\mu}\frac{2}{3}\sigma_e^2 = \frac{1}{6\mu}\sigma_e^2 \\
+&amp;\Rightarrow e_e = \frac{\sigma_e}{3\mu} = \frac{1}{3\mu}\sqrt{\frac{3}{2}\boldsymbol{s}:\boldsymbol{s}} = \frac{1}{3\mu}\sqrt{\frac{3}{2}(2\mu)^2\boldsymbol{e}:\boldsymbol{e}} = \sqrt{\frac{2}{3}\boldsymbol{e}:\boldsymbol{e}}
+\end{align*}
+\]</div>
+<h3 id="432-von-mises-yield-criterion">4.3.2 Von Mises Yield Criterion</h3>
+<p>The equivalent stress <span class="arithmatex">\(\sigma_e\)</span> can be expressed as follows:</p>
+<div class="arithmatex">\[
+\sigma_e = \sqrt{\frac{3}{2}\boldsymbol{s}:\boldsymbol{s}} = \sqrt{3J_2} 
+\]</div>
+<p>where the second invariant of the deviatoric stress tensor <span class="arithmatex">\(J_2\)</span> is defined as:</p>
+<div class="arithmatex">\[
+\begin{align*}
+J_2 &amp;= \frac{1}{6}[(\sigma_{11}-\sigma_{22})^2 + (\sigma_{22}-\sigma_{33})^2 + (\sigma_{33}-\sigma_{11})^2] + \tau_{12}^2 + \tau_{13}^2 + \tau_{23}^2\\
+&amp;=\frac{1}{6}[(\sigma_1-\sigma_2)^2 + (\sigma_2-\sigma_3)^2 + (\sigma_3-\sigma_1)^2]
+\end{align*}
+\]</div>
+<p>The yield function can be defined as:</p>
+<div class="arithmatex">\[
+f(\boldsymbol{\sigma}) = \sigma_e^2 - \sigma_y^2 = 3J_2 - \sigma_y^2 = 0
+\]</div>
+<p>or equivalently:</p>
+<div class="arithmatex">\[
+f(\boldsymbol{\sigma}) = \Vert\boldsymbol{s}\Vert - \sqrt{\frac{2}{3}}\sigma_y = 0
+\]</div>
+<p>which corresponds a circular cylinder in the principal deviatoric stress space.</p>
+<figure>
+  <img alt="Von Mises yield criterion" src="../pic/4.11.png" width="50%" />
+<br />
+<figcaption>Von Mises yield criterion</figcaption>
+</figure>
+<p>Variation in the inter-molecular distance <span class="arithmatex">\(\Rightarrow\)</span> Elastic deformation</p>
+<p>Relative sliding of the atomic layers (a permanent shape change without changing the structural volume) <span class="arithmatex">\(\Rightarrow\)</span> Plastic deformation</p>
+<h3 id="433-hardening-models">4.3.3 Hardening Models</h3>
+<ul>
+<li><strong>Strain hardening</strong>: yield stress increases proportionally to plastic deformation (metals).</li>
+<li><strong>Perfect plasticity</strong>: yield stress remains constant after yielding (only monotonic loading is of interest).</li>
+<li><strong>Strain softening</strong>: yield stress decreases as plastic deformation increases (geotechnical materials).</li>
+</ul>
+<figure>
+  <img alt="Post-plastic behaviors of materials" src="../pic/4.13.png" width="50%" />
+<br />
+<figcaption>Post-plastic behaviors of materials</figcaption>
+</figure>
+<h4 id="isotropic-hardening">Isotropic hardening</h4>
+<p>The subsequent yielding depends on the <strong>accumulated effective plastic strain</strong> <span class="arithmatex">\(e_p\)</span>. For linear hardening model, the yield stress can be expressed as:</p>
+<div class="arithmatex">\[
+\sigma_y = \sigma_{y}^0 + He_p
+\]</div>
+<p>where the plastic modulus <span class="arithmatex">\(H\)</span> is obtained from the uniaxial stress-strain relationship:</p>
+<div class="arithmatex">\[
+H = \frac{\Delta \sigma}{\Delta e_p}
+\]</div>
+<h4 id="kinematic-hardening">Kinematic hardening</h4>
+<p>The subsequent yield surfaces are shifted in the stress space, with the following shifted stess:</p>
+<div class="arithmatex">\[
+\boldsymbol{\eta} = \boldsymbol{s} - \boldsymbol{\alpha}
+\]</div>
+<p>and the yield function can be expressed as:</p>
+<div class="arithmatex">\[
+\Vert\boldsymbol{\eta}\Vert - \sqrt{\frac{2}{3}}\sigma_y = 0
+\]</div>
+<p>According to the <a href="https://doi.org/10.1090/qam/104405">Ziegler's rule</a>, the increment in back stress is written as:</p>
+<div class="arithmatex">\[
+\Delta\boldsymbol{\alpha} = \sqrt{\frac{2}{3}}H\Delta e_p\frac{\boldsymbol{\eta}}{\Vert\boldsymbol{\eta}\Vert}
+\]</div>
+<p>where the back stress <span class="arithmatex">\(\boldsymbol{\alpha}\)</span> increases in parallel direction with the shifted stress.</p>
+<h4 id="combined-hardening">Combined hardening</h4>
+<p>Isotropic hardening <span class="arithmatex">\(\Rightarrow\)</span> Increase the radius of the yield surface</p>
+<p>Kinematic hardening <span class="arithmatex">\(\Rightarrow\)</span> Shift the center of the yield surface</p>
+<p>A combined hardening model uses a parameter <span class="arithmatex">\(\beta\in[0,1]\)</span> to consider this combined effect, i.e., <strong>Bauschinger effect</strong>:</p>
+<div class="arithmatex">\[
+\begin{align*}
+&amp;\Vert\boldsymbol{\eta}\Vert - \sqrt{\frac{2}{3}}[\sigma_y^0 + (1-\beta) He_p] &amp;= 0\\
+&amp;\Delta\boldsymbol{\alpha} = \sqrt{\frac{2}{3}}\beta H\Delta e_p\frac{\boldsymbol{\eta}}{\Vert\boldsymbol{\eta}\Vert}
+\end{align*}
+\]</div>
+<h3 id="434-classical-elastoplasticity-model">4.3.4 Classical Elastoplasticity Model</h3>
+<h4 id="1-additive-decomposition">1. Additive Decomposition</h4>
+<p>Under the assumption of small deformation, the total strain can be additively decomposed into elastic and plastic parts:</p>
+<div class="arithmatex">\[
+\boldsymbol{\varepsilon} = \boldsymbol{\varepsilon}^e + \boldsymbol{\varepsilon}^p, \quad \dot{\boldsymbol{\varepsilon}} = \dot{\boldsymbol{\varepsilon}}^e + \dot{\boldsymbol{\varepsilon}}^p
+\]</div>
+<p>In static problems, the rate is equivalent to the load increment.</p>
+<p>From the assumption that plastic deformation only occurs in the deviatoric space, the plastic strain <span class="arithmatex">\(\boldsymbol{\varepsilon}^p\)</span> and its rate are <strong>deviatoric tensors</strong>.</p>
+<h4 id="2-strain-energy-density">2. Strain Energy Density</h4>
+<p>The strain energy density can be considered:</p>
+<div class="arithmatex">\[
+U(\boldsymbol{\varepsilon}^e) = \frac{1}{2}\boldsymbol{\varepsilon}^e:\mathbb{D}:\boldsymbol{\varepsilon}^e = \frac{1}{2}(\boldsymbol{\varepsilon}-\boldsymbol{\varepsilon}^p):\mathbb{D}:(\boldsymbol{\varepsilon}-\boldsymbol{\varepsilon}^p)
+\]</div>
+<p>and the stress can be derived as:</p>
+<div class="arithmatex">\[
+\boldsymbol{\sigma} = \frac{\partial U(\boldsymbol{\varepsilon}^e)}{\partial \boldsymbol{\varepsilon}^e} = \mathbb{D}:\boldsymbol{\varepsilon}^e = \mathbb{D}:(\boldsymbol{\varepsilon}-\boldsymbol{\varepsilon}^p)
+\]</div>
+<p>with the rate form as:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\dot{\boldsymbol{\sigma}} &amp;= \mathbb{D}:(\dot{\boldsymbol{\varepsilon}}-\dot{\boldsymbol{\varepsilon}}^p)\\
+&amp;=[(\lambda + \frac{2}{3}\mu)\boldsymbol{I}\otimes\boldsymbol{I}+ 2 \mu \mathbb{I}_{\text{dev}}]:(\dot{\boldsymbol{\varepsilon}}-\dot{\boldsymbol{\varepsilon}}^p)\\
+&amp;=(\lambda + \frac{2}{3}\mu)\operatorname{tr}(\dot{\boldsymbol{\varepsilon}}-\dot{\boldsymbol{\varepsilon}}^p)\boldsymbol{I} + 2 \mu(\dot{\boldsymbol{e}}-\dot{\boldsymbol{e}}^p)\\
+&amp;\quad\Downarrow\\
+&amp;\quad\Downarrow \text{tr}(\dot{\boldsymbol{\varepsilon}}^p)=0 \text{ from the assumption of }J_2 \text{ plasticity}\\
+&amp;\quad\Downarrow\\
+&amp;=(3\lambda + 2\mu)\dot{\varepsilon}_m\boldsymbol{I} + 2 \mu(\dot{\boldsymbol{e}}-\dot{\boldsymbol{e}}^p)\\
+&amp;=\dot{\sigma}_m\boldsymbol{I} + \dot{\boldsymbol{s}}
+\end{align*}
+\]</div>
+<h4 id="3-yield-function">3. Yield Function</h4>
+<p>For metal plasticity, the Von Mises yield criterion with the <strong>associative flow rule</strong> os commonly used, with the yield criterion or yield function defined as:</p>
+<div class="arithmatex">\[
+f(\boldsymbol{\eta},e_p) = \Vert\boldsymbol{\eta}\Vert - \sqrt{\frac{2}{3}}k(e_p) = 0
+\]</div>
+<p>where <span class="arithmatex">\(\boldsymbol{\eta} = \boldsymbol{s} - \boldsymbol{\alpha}\)</span> is the shifted stress, <span class="arithmatex">\(k(e_p)\)</span> is the radius of the elastic domain, and <span class="arithmatex">\(e_p\)</span> is the effective plastic strain. The corresponding elastic domain forms a convex set as:</p>
+<div class="arithmatex">\[
+E = \{(\boldsymbol{\eta},e_p) | f(\boldsymbol{\eta},e_p) \leq 0\}
+\]</div>
+<h4 id="4-associative-flow-rule">4. Associative Flow Rule</h4>
+<p>The flow rule determines the evolution of the plastic strain <span class="arithmatex">\(\boldsymbol{\varepsilon}^p\)</span>, including its direction and magnitude. The general form of the flow rule can be expressed as:</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{\varepsilon}}^p = \gamma\boldsymbol{r}(\boldsymbol{\sigma},\boldsymbol{\xi})
+\]</div>
+<p>where <span class="arithmatex">\(\boldsymbol{\xi}=(\boldsymbol{\alpha},e_p)\)</span> represents the plastic variables, and <span class="arithmatex">\(\gamma\geq0\)</span> is called a plastic consistency parameter. </p>
+<p>The expression of <span class="arithmatex">\(\boldsymbol{r}(\boldsymbol{\sigma},\boldsymbol{\xi})\)</span> can be determined by a <strong>flow potential</strong> (or <strong>plastic potential</strong>) <span class="arithmatex">\(g\)</span> as:</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{\varepsilon}}^p = \gamma\frac{\partial g(\boldsymbol{\sigma},\boldsymbol{\xi})}{\partial \boldsymbol{\sigma}}
+\]</div>
+<p>When the flow potential is the same as the yield function, the plastic model is called <strong>associative</strong>:</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{\varepsilon}}^p = \gamma\frac{\partial f(\boldsymbol{\eta},e_p)}{\partial \boldsymbol{\eta}}
+= \gamma\frac{\boldsymbol{\eta}}{\Vert\boldsymbol{\eta}\Vert}= \gamma\boldsymbol{N}
+\]</div>
+<p>where <span class="arithmatex">\(\boldsymbol{N}\)</span> is the unit deviatoric tensor normal to the yield surface. The plastic strain increases in the direction normal to the yield surface and has the magnitude of <span class="arithmatex">\(\gamma\)</span>. </p>
+<hr />
+<p>For the evolution of the plastic variables <span class="arithmatex">\(\boldsymbol{\xi}\)</span>, a general form of hardening rule can be written as:</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{\xi}} = \gamma\boldsymbol{h}(\boldsymbol{\sigma},\boldsymbol{\xi})
+\]</div>
+<p>The rate of back stres can be determined by the kinematic hardening model as:</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{\alpha}} = H_{\alpha}(e_p)\gamma\frac{\partial f(\boldsymbol{\eta},e_p)}{\partial \boldsymbol{\eta}}  = H_{\alpha}(e_p)\gamma\boldsymbol{N}
+\]</div>
+<p>where <span class="arithmatex">\(H_{\alpha}(e_p)\)</span> is the nonlinear form of the plastic modulus for kinematic hardening. </p>
+<p>(For J2 plasticity), the rate of effective plastic strain can be expressed as:</p>
+<div class="arithmatex">\[
+\dot{e}_p = \sqrt{\frac{2}{3}}\Vert\dot{\boldsymbol{e}}^p(t)\Vert = \sqrt{\frac{2}{3}}\gamma
+\]</div>
+<p>where <span class="arithmatex">\(\dot{\boldsymbol{e}}^p(t)\)</span> is the rate of deviatoric plastic strain.</p>
+<hr />
+<ul>
+<li>The saturated hardening</li>
+</ul>
+<div class="arithmatex">\[
+\dot{\boldsymbol{\alpha}} = H(e_p)\dot{\boldsymbol{e}}^p,\quad H(e_p) = H_0\exp(-\frac{e_p}{e_p^{\infty}})
+\]</div>
+<p>where <span class="arithmatex">\(e_p^{\infty}\)</span> is the asymptotic limit of the plastic strain, and <span class="arithmatex">\(H_0\)</span> is the initial plastic modulus. </p>
+<ul>
+<li>Nonlinear isotropic hardening</li>
+</ul>
+<div class="arithmatex">\[
+k(e_p) = \sigma_y^0 + (\sigma_y^{\infty}-\sigma_y^0)(1-\exp(-\frac{e_p}{e_p^{\infty}}))
+\]</div>
+<p>where <span class="arithmatex">\(\sigma_y^{\infty}\)</span> is the asymptotic limit of the yield stress.</p>
+<hr />
+<h4 id="5-plastic-consistency-parameter">5. Plastic Consistency Parameter</h4>
+<p>The plastic consistency parameter <span class="arithmatex">\(\gamma\)</span> satisfies the following <strong>Kuhn-Tucker conditions</strong>:</p>
+<div class="arithmatex">\[
+\gamma \geq 0, \quad f\leq 0, \quad \gamma f = 0
+\]</div>
+<p><strong>If the stress is on the yield surface</strong>, the state variation can be described by the rate form of the Kuhn-Tucker conditions:</p>
+<div class="arithmatex">\[
+\gamma\dot{f} = 0
+\]</div>
+<p>and when the plastic loading state continues:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\gamma &amp;&gt;0,\\
+\dot{f}(\boldsymbol{\sigma},\boldsymbol{\xi})
+&amp;=
+\frac{\partial f}{\partial \boldsymbol{\sigma}}:\dot{\boldsymbol{\sigma}} + \frac{\partial f}{\partial \boldsymbol{\xi}}:{\boldsymbol{\xi}}\\
+&amp;=\frac{\partial f}{\partial \boldsymbol{\sigma}}:\mathbb{D}:(\dot{\boldsymbol{\varepsilon}}-\dot{\boldsymbol{\varepsilon}}^p) + \frac{\partial f}{\partial \boldsymbol{\xi}}\cdot\gamma\boldsymbol{h}\\
+&amp;=\frac{\partial f}{\partial \boldsymbol{\sigma}}:\mathbb{D}:\dot{\boldsymbol{\varepsilon}} - \frac{\partial f}{\partial \boldsymbol{\sigma}}:\mathbb{D}:\gamma\boldsymbol{r} + \frac{\partial f}{\partial \boldsymbol{\xi}}\cdot\gamma\boldsymbol{h}\\
+&amp;=0
+\end{align*}
+\]</div>
+<p>Then we can solve for the plastic consistency parameter <span class="arithmatex">\(\gamma\)</span> as:</p>
+<div class="arithmatex">\[
+\gamma =
+\frac{\left\langle\frac{\partial f}{\partial\boldsymbol{\sigma}}:\mathbb{D}:\dot{\boldsymbol{\varepsilon}}\right\rangle}{\frac{\partial f}{\partial\boldsymbol{\sigma}}:\mathbb{D}:\boldsymbol r - \frac{\partial f}{\partial\boldsymbol{\xi}}\cdot \boldsymbol h}
+\]</div>
+<p>where <span class="arithmatex">\(\langle\cdot\rangle\)</span> is the Macaulay bracket to ensure that <span class="arithmatex">\(\gamma \geq 0\)</span>:
+$$
+\langle x \rangle = \begin{cases}
+x &amp; \text{if } x \geq 0, \
+0 &amp; \text{if } x &lt; 0.
+\end{cases}
+$$</p>
+<p>The physical meaning of this condition is that <strong>the normal direction to the yield surface and the stress increment rate mush have an acute angle</strong> when the material is under plastic loading:</p>
+<div class="arithmatex">\[
+\cos\theta = \frac{\frac{\partial f}{\partial\boldsymbol{\sigma}}:\mathbb{D}:\dot{\boldsymbol{\varepsilon}}}{\Vert\frac{\partial f}{\partial\boldsymbol{\sigma}}\Vert\cdot\Vert\mathbb{D}:\dot{\boldsymbol{\varepsilon}}\Vert} &gt; 0
+\]</div>
+<figure>
+  <img alt="Angle between elastic trial stress and normal to the yield surface" src="../pic/4.15.png" width="50%" />
+<br />
+<figcaption>Angle between elastic trial stress and normal to the yield surface</figcaption>
+</figure>
+<ul>
+<li><span class="arithmatex">\(\theta&lt; 90^{\circ}\)</span>: plastic loading</li>
+<li><span class="arithmatex">\(\theta = 0^{\circ}\)</span>: neutral loading</li>
+<li><span class="arithmatex">\(\theta&gt; 90^{\circ}\)</span>: elastic unloading</li>
+</ul>
+<h4 id="6-elastoplastic-tangent-stiffness">6. Elastoplastic Tangent stiffness</h4>
+<p>The <strong>continuum elastoplastic tangent stiffness</strong> <span class="arithmatex">\(\mathbb{D}^{ep}\)</span> represents the relation between the rates of stress and strain:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\dot{\boldsymbol{\sigma}} &amp;= \mathbb{D}:\dot{\boldsymbol{\varepsilon}} - \mathbb{D}:\gamma\boldsymbol{r} = \mathbb{D}:\dot{\boldsymbol{\varepsilon}} - \mathbb{D}:\boldsymbol{r}\frac{\left\langle\frac{\partial f}{\partial\boldsymbol{\sigma}}:\mathbb{D}:\dot{\boldsymbol{\varepsilon}}\right\rangle}{\frac{\partial f}{\partial\boldsymbol{\sigma}}:\mathbb{D}:\boldsymbol r - \frac{\partial f}{\partial\boldsymbol{\xi}}\cdot \boldsymbol h}\\
+&amp;= \left[\mathbb{D} - \frac{\langle\mathbb{D}:\boldsymbol{r}\otimes\frac{\partial f}{\partial\boldsymbol{\sigma}}:\mathbb{D}\rangle}{\frac{\partial f}{\partial\boldsymbol{\sigma}}:\mathbb{D}:\boldsymbol r - \frac{\partial f}{\partial\boldsymbol{\xi}}\cdot \boldsymbol h}\right]:\dot{\boldsymbol{\varepsilon}}\\
+&amp; \equiv \mathbb{D}^{ep}:\dot{\boldsymbol{\varepsilon}}
+\end{align*}
+\]</div>
+<p>In general, <span class="arithmatex">\(\mathbb{D}^{ep}\)</span> is not symmetric, but it is symmetric for associative plasticity, i.e., <span class="arithmatex">\(\boldsymbol{r} = \frac{\partial f}{\partial\boldsymbol{\sigma}}\)</span>.</p>
+<p>The <strong>Drucker's postulate</strong> states that:</p>
+<ol>
+<li>
+<p>To be a stable material, the rate of work due to stress rate must be positive: <span class="arithmatex">\(\dot{\boldsymbol{\sigma}}:\dot{\boldsymbol{\varepsilon}} &gt; 0\)</span>. Thus, <span class="arithmatex">\(\mathbb{D}^{ep}\)</span> should be <strong>positive definite</strong>.</p>
+</li>
+<li>
+<p>To have a stable hardening behavior, the rate of work during the plastic deformation must be positive: <span class="arithmatex">\(\dot{\boldsymbol{\sigma}}:\dot{\boldsymbol{\varepsilon}}^p \geq 0\)</span>. </p>
+</li>
+</ol>
+<h3 id="435-numerical-integration">4.3.5 Numerical Integration</h3>
+<h4 id="1-return-mapping-algorithm">1. Return-Mapping Algorithm</h4>
+<p>The first step is called the <strong>elastic predictor</strong> and uses the incremental strain <span class="arithmatex">\(\Delta\boldsymbol{\varepsilon}\)</span>:</p>
+<div class="arithmatex">\[
+\begin{align*}
+&amp;\boldsymbol{s}^{\text{tr}} = \boldsymbol{s}^n + 2\mu\Delta\boldsymbol{e}, \quad \boldsymbol{\alpha}^{\text{tr}} = \boldsymbol{\alpha}^n, \quad e_p^{\text{tr}} = e_p^n,\\
+&amp;\boldsymbol{\eta}^{\text{tr}} = \boldsymbol{s}^{\text{tr}} - \boldsymbol{\alpha}^{\text{tr}}
+\end{align*}
+\]</div>
+<p>If <span class="arithmatex">\(f(\boldsymbol{\eta}^{\text{tr}},e_p^{\text{tr}}) \leq 0\)</span>, the status of the material is elastic, and the stress and plastic variables are updated as:</p>
+<div class="arithmatex">\[
+\boldsymbol{s}^{n+1} = \boldsymbol{s}^{\text{tr}}, \quad \boldsymbol{\alpha}^{n+1} = \boldsymbol{\alpha}^{\text{tr}}, \quad e_p^{n+1} = e_p^{\text{tr}}
+\]</div>
+<figure>
+  <img alt="Return-mapping of isotropic elastoplasticity" src="../pic/4.16.png" width="60%" />
+<br />
+<figcaption>Return-mapping of isotropic elastoplasticity</figcaption>
+</figure>
+<p>Otherwise, <span class="arithmatex">\(f(\boldsymbol{\eta}^{\text{tr}},e_p^{\text{tr}}) &gt; 0\)</span>, the trial stress is updated as:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\boldsymbol{s}^{n+1} 
+&amp;= \boldsymbol{s}^{\text{n}} + 2\mu(\Delta\boldsymbol{e} - \Delta\boldsymbol{e}^p)\\
+&amp;= \boldsymbol{s}^{\text{tr}} - 2\mu\Delta\boldsymbol{\varepsilon}^p\\
+&amp;= \boldsymbol{s}^{\text{tr}} - 2\mu\hat{\gamma}\boldsymbol{N}
+\end{align*}
+\]</div>
+<p>and the plastic variables are updated as:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\boldsymbol{\alpha}^{n+1} 
+&amp;= \boldsymbol{\alpha}^{\text{n}} + H_{\alpha}\hat{\gamma}\boldsymbol{N}\\
+&amp;= \boldsymbol{\alpha}^{\text{tr}} + H_{\alpha}\hat{\gamma}\boldsymbol{N}\\
+e_p^{n+1} &amp;= e_p^{n} + \sqrt{\frac{2}{3}}\hat{\gamma}
+\end{align*}
+\]</div>
+<p>where <span class="arithmatex">\(\hat{\gamma}=\gamma\Delta t\)</span> is the plastic consistency parameter and <span class="arithmatex">\(\boldsymbol{N} = \frac{\boldsymbol{\eta}^{n+1}}{\Vert\boldsymbol{\eta}^{n+1}\Vert}\)</span> is a unit deviatoric tensor normal to the yield surface. The shifted stress <span class="arithmatex">\(\boldsymbol{\eta}^{n+1}\)</span> can be expressed as:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\boldsymbol{\eta}^{n+1} 
+&amp;= \boldsymbol{s}^{n+1} - \boldsymbol{\alpha}^{n+1}\\ 
+&amp;= \boldsymbol{\eta}^{\text{tr}} - [2\mu + H_{\alpha}(e_p^{n+1})]\hat{\gamma}\boldsymbol{N}
+\end{align*}
+\]</div>
+<p>Since <span class="arithmatex">\(\boldsymbol{\eta}^{n+1}\)</span> is in the same direction as <span class="arithmatex">\(\boldsymbol{N}\)</span>, <span class="arithmatex">\(\boldsymbol{N}^{\text{re}}\)</span> must be parallel to <span class="arithmatex">\(\boldsymbol{N}\)</span>. Thus, we have the following relation:</p>
+<div class="arithmatex">\[
+\boldsymbol{N} = \frac{\boldsymbol{\eta}^{n+1}}{\Vert\boldsymbol{\eta}^{n+1}\Vert} = \frac{\boldsymbol{\eta}^{\text{tr}}}{\Vert\boldsymbol{\eta}^{\text{tr}}\Vert}
+\]</div>
+<p>Then we can solve for the plastic consistency parameter <span class="arithmatex">\(\hat{\gamma}\)</span> from the yield condition:</p>
+<div class="arithmatex">\[
+\begin{align*}
+f(\boldsymbol{\eta}^{n+1},e_p^{n+1}) &amp;= \Vert\boldsymbol{\eta}^{n+1}\Vert - \sqrt{\frac{2}{3}}k(e_p^{n+1})\\
+&amp;= \Vert\boldsymbol{\eta}^{\text{tr}}\Vert - [2\mu + H_{\alpha}(e_p^{n+1})]\hat{\gamma} - \sqrt{\frac{2}{3}}k(e_p^{n+1}) = 0
+\end{align*}
+\]</div>
+<p>which is a nonlinear equation with respect to <span class="arithmatex">\(\hat{\gamma}\)</span> and can be solved using local Newton-Raphson iteration. </p>
+<h4 id="2-updating-stress-and-plastic-variables">2. Updating Stress and Plastic Variables</h4>
+<p>With solved <span class="arithmatex">\(\hat{\gamma}\)</span>, the deviatoric stress and the stress can be updated as:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\boldsymbol{s}^{n+1} &amp;= \boldsymbol{s}^{n} + 2\mu(\Delta\boldsymbol{e} - \hat{\gamma}\boldsymbol{N})\\
+\boldsymbol{\sigma}^{n+1} &amp;= \boldsymbol{\sigma}^{n} + \mathbb{D}:\Delta\boldsymbol{\varepsilon} - 2\mu\hat{\gamma}\boldsymbol{N}
+\end{align*}
+\]</div>
+<p>and the plastic variables are updated as:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\boldsymbol{\alpha}^{n+1} &amp;= \boldsymbol{\alpha}^{n} + H_{\alpha}\hat{\gamma}\boldsymbol{N}\\
+e_p^{n+1} &amp;= e_p^{n} + \sqrt{\frac{2}{3}}\hat{\gamma}
+\end{align*}
+\]</div>
+<p>Note that the incremental-form plastic consistency parameter <span class="arithmatex">\(\hat{\gamma}\)</span> is generally different from the rate-form one <span class="arithmatex">\(\gamma\)</span>, except for the case of (a) the material is in the plastic state at <span class="arithmatex">\(t^n\)</span> and (b) <span class="arithmatex">\(\Delta \boldsymbol{e}\)</span> is parallel to <span class="arithmatex">\(\boldsymbol{N}\)</span>. This generally occurs in the case of very small size of time increment.</p>
+<h4 id="3-consistent-tangent-stiffness">3, Consistent Tangent Stiffness</h4>
+<p>To ensure the quadratic convergence of the global Newton-Raphson iteration, the <strong>consistent/algorithmic tangent stiffness</strong> <span class="arithmatex">\(\mathbb{D}^{alg}\)</span> should be derived from the time integration algorithm:</p>
+<div class="arithmatex">\[
+\mathbb{D}^{\text{alg}} = \frac{\partial \Delta\boldsymbol{\sigma}}{\partial \Delta\boldsymbol{\varepsilon}} =
+\mathbb{D} - 2\mu\boldsymbol{N}\otimes\frac{\partial \hat{\gamma}}{\partial \Delta\boldsymbol{\varepsilon}}- 2\mu\hat{\gamma}\frac{\partial \boldsymbol{N}}{\partial \Delta\boldsymbol{\varepsilon}}
+\]</div>
+<p>We can leverage the relation <span class="arithmatex">\(\frac{\partial f}{\partial \Delta\boldsymbol{\varepsilon}} = 0\)</span> to derive:</p>
+<div class="arithmatex">\[
+\frac{\partial \hat{\gamma}}{\partial \Delta\boldsymbol{\varepsilon}} = \frac{2\mu\boldsymbol{N}}{2\mu + H_{\alpha} + \sqrt{\frac{2}{3}}H_{\alpha, e_p}\hat{\gamma}+ \frac{2}{3}k_{,e_p}} 
+\]</div>
+<p>and the increment of the unit normal deviatoric tensor <span class="arithmatex">\(\boldsymbol{N}\)</span> to the yeild function can be expressed as:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\frac{\partial \boldsymbol{N}}{\partial \Delta\boldsymbol{\varepsilon}} 
+&amp;= \frac{\boldsymbol{N}}{\partial\boldsymbol{\eta}^{\text{tr}}}:\frac{\partial\boldsymbol{\eta}^{\text{tr}}}{\partial \Delta\boldsymbol{\varepsilon}}\\
+&amp;=[\frac{\mathbb{I}}{\Vert\boldsymbol{\eta}^{\text{tr}}\Vert} - \frac{\boldsymbol{\eta}^{\text{tr}}\otimes\boldsymbol{\eta}^{\text{tr}}}{\Vert\boldsymbol{\eta}^{\text{tr}}\Vert^3}]:2\mu\mathbb{I}_{\text{dev}}\\
+&amp;=\frac{2\mu}{\Vert\boldsymbol{\eta}^{\text{tr}}\Vert}[\mathbb{I}_{\text{dev}} - \boldsymbol{N}\otimes\boldsymbol{N}]
+\end{align*}
+\]</div>
+<p>Then we can get the final form of the consistent tangent stiffness as:</p>
+<div class="arithmatex">\[
+\mathbb{D}^{\text{alg}} = \mathbb{D} - \frac{4\mu^2\boldsymbol{N}\otimes\boldsymbol{N}}{2\mu + H_{\alpha} + \sqrt{\frac{2}{3}}H_{\alpha, e_p}\hat{\gamma}+ \frac{2}{3}k_{,e_p}} - \frac{4\mu^2\hat{\gamma}}{\Vert\boldsymbol{\eta}^{\text{tr}}\Vert}[\mathbb{I}_{\text{dev}} - \boldsymbol{N}\otimes\boldsymbol{N}]
+\]</div>
+<h4 id="4-incremental-equations-for-elastoplasticity">4. Incremental Equations for Elastoplasticity</h4>
+<p>The energy form and its linearization are defined as:</p>
+<div class="arithmatex">\[
+\begin{align*}
+a(\boldsymbol{\xi}^n; \boldsymbol{u}^{n+1}, \overline{\boldsymbol{u}}) 
+&amp;\equiv \iint_{\Omega} \boldsymbol{\varepsilon}(\overline{\boldsymbol{u}}):\boldsymbol{\sigma}^{n+1}d\Omega\\
+a^*(\boldsymbol{\xi}^n, \boldsymbol{u}^{n+1}; \delta\boldsymbol{u}, \overline{\boldsymbol{u}}) 
+&amp;\equiv \iint_{\Omega} \boldsymbol{\varepsilon}(\overline{\boldsymbol{u}}):\mathbb{D}^{\text{alg}}:\boldsymbol{\varepsilon}(\delta\boldsymbol{u})d\Omega
+\end{align*}
+\]</div>
+<p>The equilibrium equation for the load step <span class="arithmatex">\(n+1\)</span> can be expressed as:</p>
+<div class="arithmatex">\[
+a(\boldsymbol{\xi}^n; \boldsymbol{u}^{n+1}, \overline{\boldsymbol{u}}) = l_{n+1}(\overline{\boldsymbol{u}}), \quad \forall \overline{\boldsymbol{u}}\in\mathbb{Z}
+\]</div>
+<p>Assume that the applied loads are independent of the displacement, the linearized incremental equation can be expressed as:</p>
+<div class="arithmatex">\[
+a^*(\boldsymbol{\xi}^n, \boldsymbol{u}^{n+1,k}; \delta\boldsymbol{u}^k, \overline{\boldsymbol{u}}) = l_{n+1}(\overline{\boldsymbol{u}}) - a(\boldsymbol{\xi}^n; \boldsymbol{u}^{n+1,k}, \overline{\boldsymbol{u}}), \quad \forall \overline{\boldsymbol{u}}\in\mathbb{Z}
+\]</div>
+<p>and the total displacement is updated using:</p>
+<div class="arithmatex">\[
+\boldsymbol{u}^{n+1,k+1} = \boldsymbol{u}^{n+1,k} + \delta\boldsymbol{u}^k
+\]</div>
+<h3 id="436-computational-implementation-of-elastoplasticity">4.3.6 Computational Implementation of Elastoplasticity</h3>
+<p>~</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.path", "navigation.indexes", "navigation.top", "navigation.tracking", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../assets/javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3.2.2/es5/tex-chtml-full.js"></script>
+      
+    
+  </body>
+</html>

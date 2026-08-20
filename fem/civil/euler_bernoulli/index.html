@@ -1,0 +1,3311 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Weipeng Xu">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Euler-Bernoulli Beam Element - Learn to compute</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/math.css">
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/theme-tweaks.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#euler-bernoulli-beam-element" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Learn to compute" class="md-header__button md-logo" aria-label="Learn to compute" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learn to compute
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Euler-Bernoulli Beam Element
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Finite Element Method
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Artificial Intelligence
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../misc/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Miscellaneous
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Learn to compute" class="md-nav__button md-logo" aria-label="Learn to compute" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo.svg" alt="logo">
+
+    </a>
+    Learn to compute
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Finite Element Method
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Finite Element Method
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Book notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Book notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../2007_jacob_fish/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A First Course in Finite Elements (2007)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    A First Course in Finite Elements (2007)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2007_jacob_fish/Fish_FEM_6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 7
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../2015_kim/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to Nonlinear Finite Element Analysis (2015)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Introduction to Nonlinear Finite Element Analysis (2015)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2_2" id="__nav_2_2_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015_kim/NLFEM_KIM_1.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 1.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015_kim/NLFEM_KIM_1.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 1.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015_kim/NLFEM_KIM_1.4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 1.4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015_kim/NLFEM_KIM_1.5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 1.5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015_kim/NLFEM_KIM_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2_4" id="__nav_2_2_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015_kim/NLFEM_KIM_3.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 3.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2_5" id="__nav_2_2_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 4
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015_kim/NLFEM_KIM_4.1%262/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sections 4.1 & 4.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2015_kim/NLFEM_KIM_4.3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Section 4.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../ai/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Artificial Intelligence
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Artificial Intelligence
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generative models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generative models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ai/unified_diffusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calvin Luo (2022)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../misc/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Miscellaneous
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Miscellaneous
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differential equations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Differential equations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../misc/python_ode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python ODE (2024)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python ODE (2024)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_ch1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_ch2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_ch3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_ch4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_ch5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/python_ode/pyode_appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Continuum mechanics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Continuum mechanics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../misc/chen/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elasticity and Plasticity (2007)
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_3_1" id="__nav_4_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Elasticity and Plasticity (2007)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/chen/01_stress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/chen/02_strain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/kinematics_bonet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kinematics — Bonet, Gil & Wood (2016) (incomplete)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/tensor_holzapfel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vectors and Tensors — Holzapfel (2002) (incomplete)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/tensor_eigenchris/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Eigenchris (incomplete)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-hypothesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Hypothesis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-kinematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Kinematics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Kinematics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-nodal-degrees-of-freedom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Nodal Degrees of Freedom
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-kinematic-assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Kinematic Assumptions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Kinematic Assumptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#axial-deformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Axial Deformation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bending-xy-plane-and-xz-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bending (xy-plane and xz-plane)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#torsion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Torsion
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-displacement-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Displacement Field
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-strain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Strain
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Strain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normal-strain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Normal Strain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shear-strains-critical-distinction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shear Strains (Critical Distinction)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-strains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary of Strains
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-strain-energy-and-weak-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Strain Energy and Weak Form
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Strain Energy and Weak Form">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-strain-energy-functional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Strain Energy Functional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-external-virtual-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 External Virtual Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-weak-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Weak Form
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-shape-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Shape Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Shape Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-axial-and-torsion-c0-linear-lagrange-interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Axial and Torsion — \(C^0\) Linear Lagrange Interpolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-bending-c1-hermite-cubic-interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Bending — \(C^1\) Hermite Cubic Interpolation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-element-stiffness-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Element Stiffness Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Element Stiffness Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-axial-stiffness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Axial Stiffness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-torsional-stiffness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Torsional Stiffness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-xy-plane-bending-stiffness-about-z-axis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 xy-Plane Bending Stiffness (about z-axis)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-xz-plane-bending-stiffness-about-y-axis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 xz-Plane Bending Stiffness (about y-axis)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-complete-1212-stiffness-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Complete 12×12 Stiffness Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 Complete 12×12 Stiffness Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rigid-body-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rigid-Body Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-element-consistent-mass-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Element Consistent Mass Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Element Consistent Mass Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-kinetic-energy-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Kinetic Energy Formulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-axial-mass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Axial Mass
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-torsional-mass-fundamental-derivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Torsional Mass — Fundamental Derivation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-xy-plane-bending-mass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 xy-Plane Bending Mass
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-xz-plane-bending-mass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 xz-Plane Bending Mass
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-complete-1212-mass-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 Complete 12×12 Mass Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6 Complete 12×12 Mass Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rigid-body-verification_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rigid-Body Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-3d-coordinate-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 3D Coordinate Transformation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 3D Coordinate Transformation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-local-coordinate-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Local Coordinate System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-vertical-element-singularity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Vertical Element Singularity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-transformation-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Transformation Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-global-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Global Assembly
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-common-implementation-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Common Implementation Errors
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="euler-bernoulli-beam-element">Euler-Bernoulli Beam Element</h1>
+<blockquote>
+<p>Last updated: 01 July 2026</p>
+</blockquote>
+<h2 id="1-hypothesis">1. Hypothesis</h2>
+<p>The Euler-Bernoulli beam theory states that <strong>cross-sections remain plane and perpendicular to the neutral axis after deformation</strong>. This implies that transverse shear deformation is zero. The theory directly describes axial deformation and bending; torsion is not part of the original kinematic hypothesis but can be superimposed independently via Saint-Venant's torsion theory. The following derivations assume <strong>linear elasticity</strong> and <strong>small deformations</strong>. Extension to large deformations will be discussed later.</p>
+<h2 id="2-kinematics">2. Kinematics</h2>
+<p>This section establishes the relationship between the nodal degrees of freedom and the strain field within the element. The fundamental strategy is to treat axial, bending, and torsion as <strong>decoupled deformation modes</strong>, apply their respective kinematic assumptions, and then superimpose the results using the principle of linear superposition.</p>
+<h3 id="21-nodal-degrees-of-freedom">2.1 Nodal Degrees of Freedom</h3>
+<p>The element possesses 12 degrees of freedom (DOFs), with 6 DOFs assigned to each of the two nodes:</p>
+<div class="arithmatex">\[
+\mathbf{u}^{(e)} = [u_1, v_1, w_1, \theta_{x1}, \theta_{y1}, \theta_{z1}, \ u_2, v_2, w_2, \theta_{x2}, \theta_{y2}, \theta_{z2}]^{\text{T}} \in \mathbb{R}^{12}
+\]</div>
+<p>The physical interpretations are:
+- <span class="arithmatex">\(u\)</span>: Axial displacement along the local <span class="arithmatex">\(x\)</span>-axis.
+- <span class="arithmatex">\(v, w\)</span>: Transverse displacements along the local <span class="arithmatex">\(y\)</span>- and <span class="arithmatex">\(z\)</span>-axes.
+- <span class="arithmatex">\(\theta_x\)</span>: Rotational angle about the local <span class="arithmatex">\(x\)</span>-axis (torsion).
+- <span class="arithmatex">\(\theta_y, \theta_z\)</span>: Rotational angles about the local <span class="arithmatex">\(y\)</span>- and <span class="arithmatex">\(z\)</span>-axes (bending slopes).</p>
+<h3 id="22-kinematic-assumptions">2.2 Kinematic Assumptions</h3>
+<p>To construct the displacement field, we define the governing assumptions for each deformation mode independently.</p>
+<h4 id="axial-deformation">Axial Deformation</h4>
+<p>The axial displacement <span class="arithmatex">\(u(x)\)</span> is uniform over the cross-section and varies only along the beam axis.</p>
+<h4 id="bending-xy-plane-and-xz-plane">Bending (xy-plane and xz-plane)</h4>
+<p>The Euler-Bernoulli beam theory states that plane cross-sections remain plane and <strong>perpendicular to the neutral axis</strong> after bending deformation. This implies that transverse shear deformation due to bending is zero.</p>
+<p>For the <span class="arithmatex">\(xy\)</span>-plane (bending about <span class="arithmatex">\(z\)</span>), the slope of the neutral axis equals the cross-sectional rotation:</p>
+<div class="arithmatex">\[
+\theta_z(x) = \frac{dv(x)}{dx}
+\]</div>
+<p>For the <span class="arithmatex">\(xz\)</span>-plane (bending about <span class="arithmatex">\(y\)</span>), following the right-hand rule, the rotation relates to the slope by:</p>
+<div class="arithmatex">\[
+\theta_y(x) = -\frac{dw(x)}{dx}
+\]</div>
+<blockquote>
+<p>The negative sign in <span class="arithmatex">\(\theta_y\)</span> is a consequence of the right-hand rule: a positive rotation about the <span class="arithmatex">\(y\)</span>-axis corresponds to a negative slope of the transverse displacement <span class="arithmatex">\(w\)</span>.</p>
+</blockquote>
+<h4 id="torsion">Torsion</h4>
+<p>The torsion deformation is superimposed independently. Adopting the <strong>Saint-Venant torsion theory</strong>, we assume:
+- The cross-section rotates as a rigid body about the <span class="arithmatex">\(x\)</span>-axis by an angle <span class="arithmatex">\(\theta_x(x)\)</span>.
+- The warping (out-of-plane axial displacement) is uniform along the beam axis, meaning it does not produce any axial normal strain <span class="arithmatex">\(\varepsilon_{xx}\)</span>.
+- The only strain components introduced by torsion are the shear strains <span class="arithmatex">\(\gamma_{xy}\)</span> and <span class="arithmatex">\(\gamma_{xz}\)</span> in the cross-section.</p>
+<h3 id="23-displacement-field">2.3 Displacement Field</h3>
+<p>The total displacement of a point <span class="arithmatex">\((x, y, z)\)</span> is the superposition of contributions from each deformation mode. Cross-sectional rotations about the three axes produce additional displacements for points off the neutral axis (<span class="arithmatex">\(y \neq 0\)</span> or <span class="arithmatex">\(z \neq 0\)</span>).</p>
+<div class="arithmatex">\[
+\boxed{
+\begin{aligned}
+U_x(x,y,z) &amp;= u(x) - y\,\theta_z(x) + z\,\theta_y(x) \\
+U_y(x,y,z) &amp;= v(x) - z\,\theta_x(x) \\
+U_z(x,y,z) &amp;= w(x) + y\,\theta_x(x)
+\end{aligned}
+}
+\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Term</th>
+<th style="text-align: left;">Origin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(u\)</span></td>
+<td style="text-align: left;">Axial translation of the neutral axis</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(v\)</span></td>
+<td style="text-align: left;">Transverse translation in <span class="arithmatex">\(y\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(w\)</span></td>
+<td style="text-align: left;">Transverse translation in <span class="arithmatex">\(z\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(-y\theta_z\)</span></td>
+<td style="text-align: left;">Rotation <span class="arithmatex">\(\theta_z\)</span> about <span class="arithmatex">\(z\)</span> (xy-bending) moves <span class="arithmatex">\(y\)</span>-offset points in <span class="arithmatex">\(x\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(z\theta_y\)</span></td>
+<td style="text-align: left;">Rotation <span class="arithmatex">\(\theta_y\)</span> about <span class="arithmatex">\(y\)</span> (xz-bending) moves <span class="arithmatex">\(z\)</span>-offset points in <span class="arithmatex">\(x\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(-z\theta_x\)</span></td>
+<td style="text-align: left;">Torsion <span class="arithmatex">\(\theta_x\)</span> moves points tangentially in <span class="arithmatex">\(y\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(y\theta_x\)</span></td>
+<td style="text-align: left;">Torsion <span class="arithmatex">\(\theta_x\)</span> moves points tangentially in <span class="arithmatex">\(z\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The signs follow from the right-hand rule.</p>
+<h3 id="24-strain">2.4 Strain</h3>
+<p>With the displacement field established, we now derive the strain components. The infinitesimal strain tensor is defined as <span class="arithmatex">\(\varepsilon_{ij} = \frac{1}{2}(\frac{\partial U_i}{\partial x_j} + \frac{\partial U_j}{\partial x_i})\)</span>.</p>
+<h4 id="normal-strain">Normal Strain</h4>
+<p>The axial normal strain is obtained by differentiating <span class="arithmatex">\(U_x\)</span> with respect to <span class="arithmatex">\(x\)</span>:</p>
+<div class="arithmatex">\[
+\varepsilon_{xx} = \frac{\partial U_x}{\partial x}
+= \frac{du}{dx} - y\frac{d\theta_z}{dx} + z\frac{d\theta_y}{dx}
+\]</div>
+<p>Substituting the Euler-Bernoulli slope relations <span class="arithmatex">\(\theta_z = v'\)</span> and <span class="arithmatex">\(\theta_y = -w'\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\varepsilon_{xx} = \frac{du}{dx} - y\frac{d^2v}{dx^2} - z\frac{d^2w}{dx^2}}
+\]</div>
+<h4 id="shear-strains-critical-distinction">Shear Strains (Critical Distinction)</h4>
+<p>We explicitly compute the full shear strain expressions before applying the bending assumptions. </p>
+<p>For the <span class="arithmatex">\(xy\)</span>-plane:</p>
+<div class="arithmatex">\[
+\gamma_{xy} = \frac{\partial U_x}{\partial y} + \frac{\partial U_y}{\partial x}
+= \left(-\theta_z + \frac{dv}{dx}\right) - z\frac{d\theta_x}{dx}
+\]</div>
+<p>Notice the bracket <span class="arithmatex">\(\left(-\theta_z + \frac{dv}{dx}\right)\)</span>. According to the Euler-Bernoulli hypothesis in Section 2.2, <span class="arithmatex">\(\theta_z = dv/dx\)</span>. Therefore, the <strong>transverse shear deformation due to bending</strong> is identically zero:</p>
+<div class="arithmatex">\[
+-\theta_z + \frac{dv}{dx} = 0
+\]</div>
+<p>Thus, the shear strain in the <span class="arithmatex">\(xy\)</span>-plane reduces to:</p>
+<div class="arithmatex">\[
+\boxed{\gamma_{xy} = -z\frac{d\theta_x}{dx}}
+\]</div>
+<p>Similarly, for the <span class="arithmatex">\(xz\)</span>-plane:</p>
+<div class="arithmatex">\[
+\gamma_{xz} = \frac{\partial U_x}{\partial z} + \frac{\partial U_z}{\partial x}
+= \left(\theta_y + \frac{dw}{dx}\right) + y\frac{d\theta_x}{dx}
+\]</div>
+<p>Again, the bracket <span class="arithmatex">\(\left(\theta_y + \frac{dw}{dx}\right)\)</span> represents the transverse shear deformation due to bending in the <span class="arithmatex">\(xz\)</span>-plane. Since <span class="arithmatex">\(\theta_y = -dw/dx\)</span>, it vanishes:</p>
+<div class="arithmatex">\[
+\theta_y + \frac{dw}{dx} = 0
+\]</div>
+<p>Leaving only the torsional contribution:</p>
+<div class="arithmatex">\[
+\boxed{\gamma_{xz} = y\frac{d\theta_x}{dx}}
+\]</div>
+<h4 id="summary-of-strains">Summary of Strains</h4>
+<p>The final strain field utilized for the element formulation is:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;">Expression</th>
+<th style="text-align: left;">Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\varepsilon_{xx}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(u' - y v'' - z w''\)</span></td>
+<td style="text-align: left;">Axial + Bending</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\gamma_{xy}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(-z\,\theta_x'\)</span></td>
+<td style="text-align: left;">Torsion only</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\gamma_{xz}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(y\,\theta_x'\)</span></td>
+<td style="text-align: left;">Torsion only</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Remarks: The transverse shear strains generated by bending forces are completely omitted in this theory. The only shear strains present in the cross-section are entirely due to the Saint-Venant torsion. This confirms that the axial/bending and torsion modes are fully decoupled at the strain energy level.</p>
+</blockquote>
+<h2 id="4-strain-energy-and-weak-form">4. Strain Energy and Weak Form</h2>
+<h3 id="41-strain-energy-functional">4.1 Strain Energy Functional</h3>
+<p>Total strain energy <span class="arithmatex">\(U = \frac12 \int_V \boldsymbol{\sigma}^T \boldsymbol{\varepsilon}\,dV\)</span>. With <span class="arithmatex">\(\sigma_{xx} = E\varepsilon_{xx}\)</span> and <span class="arithmatex">\(\tau = G\gamma\)</span>:</p>
+<div class="arithmatex">\[
+U = \frac12 \int_V \left[E\varepsilon_{xx}^2 + G(\gamma_{xy}^2 + \gamma_{xz}^2)\right] dV
+\]</div>
+<p>Integrating term by term over the cross-section:</p>
+<p><strong>Axial</strong> (<span class="arithmatex">\(\int_A dA = A\)</span>):
+$$
+\frac12\int_0^L EA\,(u')^2 dx
+$$</p>
+<p><strong>xy-bending</strong> (<span class="arithmatex">\(\int_A y^2 dA = I_z\)</span>):
+$$
+\frac12\int_0^L EI_z\,(v'')^2 dx
+$$</p>
+<p><strong>xz-bending</strong> (<span class="arithmatex">\(\int_A z^2 dA = I_y\)</span>):
+$$
+\frac12\int_0^L EI_y\,(w'')^2 dx
+$$</p>
+<p><strong>Torsion</strong> (<span class="arithmatex">\(\int_A r^2 dA = J\)</span>, the torsion constant):
+$$
+\frac12\int_0^L GJ\,(\theta_x')^2 dx
+$$</p>
+<blockquote>
+<p><strong>Important</strong>: For circular cross-sections, <span class="arithmatex">\(J = I_p = I_y + I_z\)</span>. For non-circular sections, <span class="arithmatex">\(J &lt; I_p\)</span> (determined by the Saint-Venant torsion solution). The stiffness matrix uses <span class="arithmatex">\(J\)</span>, while the mass matrix uses <span class="arithmatex">\(I_p\)</span> — this distinction is critical and is detailed in Section 7.3.</p>
+</blockquote>
+<p>The four modes are fully decoupled:</p>
+<div class="arithmatex">\[
+\boxed{U = \frac12\int_0^L\Big[EA(u')^2 + EI_z(v'')^2 + EI_y(w'')^2 + GJ(\theta_x')^2\Big] dx}
+\]</div>
+<h3 id="42-external-virtual-work">4.2 External Virtual Work</h3>
+<div class="arithmatex">\[
+\delta W = \int_0^L (p\,\delta u + q_y\,\delta v + q_z\,\delta w + m_x\,\delta\theta_x) dx + \text{boundary nodal force terms}
+\]</div>
+<h3 id="43-weak-form">4.3 Weak Form</h3>
+<p>Applying the principle of virtual work <span class="arithmatex">\(\delta U - \delta W = 0\)</span> and integrating by parts yields the symmetric weak form:</p>
+<div class="arithmatex">\[
+\boxed{
+\int_0^L EA\,u'\delta u'\,dx + \int_0^L EI_z\,v''\delta v''\,dx + \int_0^L EI_y\,w''\delta w''\,dx + \int_0^L GJ\,\theta_x'\delta\theta_x'\,dx = \delta W
+}
+\]</div>
+<hr />
+<h2 id="5-shape-functions">5. Shape Functions</h2>
+<p>Introduce the natural coordinate <span class="arithmatex">\(\xi = x/L \in [0, 1]\)</span>, so <span class="arithmatex">\(dx = L d\xi\)</span> and <span class="arithmatex">\(d/dx = (1/L)\,d/d\xi\)</span>.</p>
+<h3 id="51-axial-and-torsion-c0-linear-lagrange-interpolation">5.1 Axial and Torsion — <span class="arithmatex">\(C^0\)</span> Linear Lagrange Interpolation</h3>
+<p>Both <span class="arithmatex">\(u(x)\)</span> and <span class="arithmatex">\(\theta_x(x)\)</span> require only <span class="arithmatex">\(C^0\)</span> continuity (first derivative not needed in the weak form):</p>
+<div class="arithmatex">\[
+\begin{aligned}
+u(\xi) &amp;= (1-\xi) u_1 + \xi u_2 \equiv N_1(\xi) u_1 + N_2(\xi) u_2 \\
+\theta_x(\xi) &amp;= (1-\xi) \theta_{x1} + \xi \theta_{x2}
+\end{aligned}
+\]</div>
+<div class="arithmatex">\[
+\boxed{N_1(\xi) = 1 - \xi, \qquad N_2(\xi) = \xi}
+\]</div>
+<p>Properties: <span class="arithmatex">\(N_1(0)=1, N_1(1)=0\)</span>; <span class="arithmatex">\(N_2(0)=0, N_2(1)=1\)</span>.</p>
+<h3 id="52-bending-c1-hermite-cubic-interpolation">5.2 Bending — <span class="arithmatex">\(C^1\)</span> Hermite Cubic Interpolation</h3>
+<p>The bending weak form contains <span class="arithmatex">\(v''\)</span>, requiring <span class="arithmatex">\(C^1\)</span> continuity. A cubic polynomial <span class="arithmatex">\(v(\xi) = a_0 + a_1\xi + a_2\xi^2 + a_3\xi^3\)</span> is determined by four boundary conditions:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+v(0) &amp;= v_1, \quad v'(0)/L = \theta_{z1} \\
+v(1) &amp;= v_2, \quad v'(1)/L = \theta_{z2}
+\end{aligned}
+\]</div>
+<p>Solving for <span class="arithmatex">\(a_0, a_1, a_2, a_3\)</span> and grouping by DOFs yields:</p>
+<div class="arithmatex">\[
+v(\xi) = H_1(\xi) v_1 + H_2(\xi) \theta_{z1} + H_3(\xi) v_2 + H_4(\xi) \theta_{z2}
+\]</div>
+<div class="arithmatex">\[
+\boxed{
+\begin{aligned}
+H_1(\xi) &amp;= 2\xi^3 - 3\xi^2 + 1 \\
+H_2(\xi) &amp;= L(\xi^3 - 2\xi^2 + \xi) \\
+H_3(\xi) &amp;= -2\xi^3 + 3\xi^2 \\
+H_4(\xi) &amp;= L(\xi^3 - \xi^2)
+\end{aligned}}
+\]</div>
+<p><strong>Verification</strong> (only <span class="arithmatex">\(v_1=1\)</span>, all other DOFs zero at <span class="arithmatex">\(\xi=0\)</span>):
+- <span class="arithmatex">\(H_1(0) = 1\)</span>, <span class="arithmatex">\(H_1'(0) = 0\)</span> <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(v=1, \theta_z=0\)</span> at node 1 <span class="arithmatex">\(\checkmark\)</span>
+- <span class="arithmatex">\(H_2(0) = 0\)</span>, <span class="arithmatex">\(H_2'(0)/L = 1\)</span> <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(v=0, \theta_z=1\)</span> at node 1 <span class="arithmatex">\(\checkmark\)</span></p>
+<p>For xz-plane bending, since <span class="arithmatex">\(\theta_y = -dw/dx\)</span>, the shape functions for <span class="arithmatex">\(\theta_y\)</span> are <span class="arithmatex">\(-H_2\)</span> and <span class="arithmatex">\(-H_4\)</span>.</p>
+<hr />
+<h2 id="6-element-stiffness-matrix">6. Element Stiffness Matrix</h2>
+<h3 id="61-axial-stiffness">6.1 Axial Stiffness</h3>
+<p>Strain-displacement matrix <span class="arithmatex">\(\mathbf{B}_a\)</span>:</p>
+<div class="arithmatex">\[
+\varepsilon_{xx}^a = \frac{du}{dx} = \frac{1}{L}\frac{d}{d\xi}[N_1, N_2]\begin{Bmatrix}u_1\\u_2\end{Bmatrix}
+= \frac{1}{L}[-1, 1]\begin{Bmatrix}u_1\\u_2\end{Bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\boxed{\mathbf{B}_a = \frac{1}{L}[-1, \; 1]}
+\]</div>
+<p>Element stiffness matrix:</p>
+<div class="arithmatex">\[
+\mathbf{k}_a = \int_0^L \mathbf{B}_a^T EA\,\mathbf{B}_a\,dx
+= EA\int_0^1 \frac{1}{L^2}\begin{bmatrix}-1\\1\end{bmatrix}[-1, 1]\,L d\xi
+= \frac{EA}{L}\int_0^1\begin{bmatrix}1 &amp; -1 \\ -1 &amp; 1\end{bmatrix}d\xi
+\]</div>
+<div class="arithmatex">\[
+\boxed{\mathbf{k}_a = \frac{EA}{L}\begin{bmatrix}1 &amp; -1 \\ -1 &amp; 1\end{bmatrix}}
+\]</div>
+<h3 id="62-torsional-stiffness">6.2 Torsional Stiffness</h3>
+<p>Identical form, replacing <span class="arithmatex">\(EA\)</span> with <span class="arithmatex">\(GJ\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{k}_t = \frac{GJ}{L}\begin{bmatrix}1 &amp; -1 \\ -1 &amp; 1\end{bmatrix}}
+\]</div>
+<h3 id="63-xy-plane-bending-stiffness-about-z-axis">6.3 xy-Plane Bending Stiffness (about z-axis)</h3>
+<p>Curvature-displacement matrix <span class="arithmatex">\(\mathbf{B}_{bz}\)</span>:</p>
+<div class="arithmatex">\[
+\kappa_z = \frac{d^2v}{dx^2} = \frac{1}{L^2}\frac{d^2}{d\xi^2}[H_1, H_2, H_3, H_4]\begin{Bmatrix}v_1\\\theta_{z1}\\v_2\\\theta_{z2}\end{Bmatrix}
+\]</div>
+<p>Second derivatives of <span class="arithmatex">\(H_i\)</span> with respect to <span class="arithmatex">\(\xi\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+H_1''(\xi) &amp;= 12\xi - 6 \\
+H_2''(\xi) &amp;= L(6\xi - 4) \\
+H_3''(\xi) &amp;= -12\xi + 6 \\
+H_4''(\xi) &amp;= L(6\xi - 2)
+\end{aligned}
+\]</div>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{B}_{bz} = \left[\frac{12\xi-6}{L^2},\; \frac{6\xi-4}{L},\; \frac{-12\xi+6}{L^2},\; \frac{6\xi-2}{L}\right]}
+\]</div>
+<p>The stiffness matrix is obtained by integration:</p>
+<div class="arithmatex">\[
+\mathbf{k}_{bz} = \int_0^L \mathbf{B}_{bz}^T EI_z\,\mathbf{B}_{bz}\,dx
+= EI_z L \int_0^1 \mathbf{B}_{bz}^T \mathbf{B}_{bz}\,d\xi
+\]</div>
+<p>Example entry <span class="arithmatex">\(k_{11}\)</span>:</p>
+<div class="arithmatex">\[
+k_{11} = EI_z L \int_0^1 \frac{(12\xi-6)^2}{L^4}d\xi
+= \frac{EI_z}{L^3}\int_0^1(144\xi^2 - 144\xi + 36)d\xi
+= \frac{EI_z}{L^3}\left[\frac{144}{3} - \frac{144}{2} + 36\right] = \frac{12EI_z}{L^3}
+\]</div>
+<p>All entries:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{k}_{bz} = \begin{bmatrix}
+\dfrac{12EI_z}{L^3} &amp; \dfrac{6EI_z}{L^2} &amp; -\dfrac{12EI_z}{L^3} &amp; \dfrac{6EI_z}{L^2} \\[10pt]
+\dfrac{6EI_z}{L^2} &amp; \dfrac{4EI_z}{L} &amp; -\dfrac{6EI_z}{L^2} &amp; \dfrac{2EI_z}{L} \\[10pt]
+-\dfrac{12EI_z}{L^3} &amp; -\dfrac{6EI_z}{L^2} &amp; \dfrac{12EI_z}{L^3} &amp; -\dfrac{6EI_z}{L^2} \\[10pt]
+\dfrac{6EI_z}{L^2} &amp; \dfrac{2EI_z}{L} &amp; -\dfrac{6EI_z}{L^2} &amp; \dfrac{4EI_z}{L}
+\end{bmatrix}}
+\]</div>
+<h3 id="64-xz-plane-bending-stiffness-about-y-axis">6.4 xz-Plane Bending Stiffness (about y-axis)</h3>
+<p>Since <span class="arithmatex">\(\theta_y = -dw/dx\)</span>, the shape functions for <span class="arithmatex">\(\theta_y\)</span> are <span class="arithmatex">\(-H_2\)</span> and <span class="arithmatex">\(-H_4\)</span>:</p>
+<div class="arithmatex">\[
+w(\xi) = H_1(\xi) w_1 + [-H_2(\xi)]\theta_{y1} + H_3(\xi) w_2 + [-H_4(\xi)]\theta_{y2}
+\]</div>
+<p>This sign change propagates to the stiffness matrix:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{k}_{by} = \begin{bmatrix}
+\dfrac{12EI_y}{L^3} &amp; -\dfrac{6EI_y}{L^2} &amp; -\dfrac{12EI_y}{L^3} &amp; -\dfrac{6EI_y}{L^2} \\[10pt]
+-\dfrac{6EI_y}{L^2} &amp; \dfrac{4EI_y}{L} &amp; \dfrac{6EI_y}{L^2} &amp; \dfrac{2EI_y}{L} \\[10pt]
+-\dfrac{12EI_y}{L^3} &amp; \dfrac{6EI_y}{L^2} &amp; \dfrac{12EI_y}{L^3} &amp; \dfrac{6EI_y}{L^2} \\[10pt]
+-\dfrac{6EI_y}{L^2} &amp; \dfrac{2EI_y}{L} &amp; \dfrac{6EI_y}{L^2} &amp; \dfrac{4EI_y}{L}
+\end{bmatrix}}
+\]</div>
+<p>Note the sign difference from <span class="arithmatex">\(\mathbf{k}_{bz}\)</span>: <span class="arithmatex">\(v\)</span>-<span class="arithmatex">\(\theta_z\)</span> coupling is positive (<span class="arithmatex">\(+6EI_z/L^2\)</span>), <span class="arithmatex">\(w\)</span>-<span class="arithmatex">\(\theta_y\)</span> coupling is negative (<span class="arithmatex">\(-6EI_y/L^2\)</span>).</p>
+<h3 id="65-complete-1212-stiffness-matrix">6.5 Complete 12×12 Stiffness Matrix</h3>
+<p>With DOF ordering <span class="arithmatex">\([u_1, v_1, w_1, \theta_{x1}, \theta_{y1}, \theta_{z1}, u_2, v_2, w_2, \theta_{x2}, \theta_{y2}, \theta_{z2}]\)</span>:</p>
+<div class="arithmatex">\[
+\mathbf{k}_{loc} = \begin{bmatrix}
+\mathbf{K}_{11} &amp; \mathbf{K}_{12} \\[4pt]
+\mathbf{K}_{12}^T &amp; \mathbf{K}_{22}
+\end{bmatrix}_{12\times12}
+\]</div>
+<p><strong><span class="arithmatex">\(\mathbf{K}_{11}\)</span> (Node 1 × Node 1):</strong></p>
+<div class="arithmatex">\[
+\mathbf{K}_{11} = \begin{bmatrix}
+\frac{EA}{L} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\[6pt]
+0 &amp; \frac{12EI_z}{L^3} &amp; 0 &amp; 0 &amp; 0 &amp; \frac{6EI_z}{L^2} \\[6pt]
+0 &amp; 0 &amp; \frac{12EI_y}{L^3} &amp; 0 &amp; -\frac{6EI_y}{L^2} &amp; 0 \\[6pt]
+0 &amp; 0 &amp; 0 &amp; \frac{GJ}{L} &amp; 0 &amp; 0 \\[6pt]
+0 &amp; 0 &amp; -\frac{6EI_y}{L^2} &amp; 0 &amp; \frac{4EI_y}{L} &amp; 0 \\[6pt]
+0 &amp; \frac{6EI_z}{L^2} &amp; 0 &amp; 0 &amp; 0 &amp; \frac{4EI_z}{L}
+\end{bmatrix}
+\]</div>
+<p><strong><span class="arithmatex">\(\mathbf{K}_{12}\)</span> (Node 1 × Node 2):</strong></p>
+<div class="arithmatex">\[
+\mathbf{K}_{12} = \begin{bmatrix}
+-\frac{EA}{L} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\[6pt]
+0 &amp; -\frac{12EI_z}{L^3} &amp; 0 &amp; 0 &amp; 0 &amp; \frac{6EI_z}{L^2} \\[6pt]
+0 &amp; 0 &amp; -\frac{12EI_y}{L^3} &amp; 0 &amp; -\frac{6EI_y}{L^2} &amp; 0 \\[6pt]
+0 &amp; 0 &amp; 0 &amp; -\frac{GJ}{L} &amp; 0 &amp; 0 \\[6pt]
+0 &amp; 0 &amp; \frac{6EI_y}{L^2} &amp; 0 &amp; \frac{2EI_y}{L} &amp; 0 \\[6pt]
+0 &amp; -\frac{6EI_z}{L^2} &amp; 0 &amp; 0 &amp; 0 &amp; \frac{2EI_z}{L}
+\end{bmatrix}
+\]</div>
+<p><strong><span class="arithmatex">\(\mathbf{K}_{22}\)</span> (Node 2 × Node 2):</strong></p>
+<div class="arithmatex">\[
+\mathbf{K}_{22} = \begin{bmatrix}
+\frac{EA}{L} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\[6pt]
+0 &amp; \frac{12EI_z}{L^3} &amp; 0 &amp; 0 &amp; 0 &amp; -\frac{6EI_z}{L^2} \\[6pt]
+0 &amp; 0 &amp; \frac{12EI_y}{L^3} &amp; 0 &amp; \frac{6EI_y}{L^2} &amp; 0 \\[6pt]
+0 &amp; 0 &amp; 0 &amp; \frac{GJ}{L} &amp; 0 &amp; 0 \\[6pt]
+0 &amp; 0 &amp; \frac{6EI_y}{L^2} &amp; 0 &amp; \frac{4EI_y}{L} &amp; 0 \\[6pt]
+0 &amp; -\frac{6EI_z}{L^2} &amp; 0 &amp; 0 &amp; 0 &amp; \frac{4EI_z}{L}
+\end{bmatrix}
+\]</div>
+<h4 id="rigid-body-verification">Rigid-Body Verification</h4>
+<p>For <span class="arithmatex">\(y\)</span>-direction rigid translation <span class="arithmatex">\([0,1,0,0,0,0,0,1,0,0,0,0]^T\)</span>:</p>
+<ul>
+<li><span class="arithmatex">\(v\)</span>-force at node 1: <span class="arithmatex">\(\frac{12EI_z}{L^3}\cdot1 + (-\frac{12EI_z}{L^3})\cdot1 = 0\)</span> <span class="arithmatex">\(\checkmark\)</span></li>
+<li>Moment about <span class="arithmatex">\(z\)</span> at node 1: <span class="arithmatex">\(\frac{6EI_z}{L^2}\cdot1 + (-\frac{6EI_z}{L^2})\cdot1 = 0\)</span> <span class="arithmatex">\(\checkmark\)</span></li>
+</ul>
+<p>All rigid-body modes produce zero internal forces. The matrix is symmetric (<span class="arithmatex">\(\mathbf{K}_{11}^T = \mathbf{K}_{11}\)</span>, <span class="arithmatex">\(\mathbf{K}_{22}^T = \mathbf{K}_{22}\)</span>).</p>
+<hr />
+<h2 id="7-element-consistent-mass-matrix">7. Element Consistent Mass Matrix</h2>
+<h3 id="71-kinetic-energy-formulation">7.1 Kinetic Energy Formulation</h3>
+<p>The consistent mass matrix is derived from the kinetic energy using the <strong>same</strong> shape functions as the stiffness matrix. The kinetic energy is:</p>
+<div class="arithmatex">\[
+T = \frac12\int_V \rho(\dot{U}_x^2 + \dot{U}_y^2 + \dot{U}_z^2)\,dV
+\]</div>
+<p>With <span class="arithmatex">\(\mathbf{U} = \mathbf{N}\dot{\mathbf{u}}^{(e)}\)</span>:</p>
+<div class="arithmatex">\[
+T = \frac12 \dot{\mathbf{u}}^{(e)T} \underbrace{\left(\int_V \rho \mathbf{N}^T\mathbf{N}\,dV\right)}_{\mathbf{m}^{(e)}} \dot{\mathbf{u}}^{(e)}
+\]</div>
+<h3 id="72-axial-mass">7.2 Axial Mass</h3>
+<p><span class="arithmatex">\(u(\xi) = N_1 u_1 + N_2 u_2\)</span>, kinetic energy:</p>
+<div class="arithmatex">\[
+T_a = \frac12\int_0^L \rho A\,\dot{u}^2 dx = \frac12\rho AL\int_0^1 \bigl[(1-\xi)\dot{u}_1 + \xi\dot{u}_2\bigr]^2 d\xi
+\]</div>
+<p>Mass matrix:</p>
+<div class="arithmatex">\[
+\mathbf{m}_a = \rho AL\int_0^1\begin{bmatrix}(1-\xi)^2 &amp; (1-\xi)\xi \\ (1-\xi)\xi &amp; \xi^2\end{bmatrix}d\xi
+\]</div>
+<p>Using <span class="arithmatex">\(\int_0^1 (1-\xi)^2 d\xi = \frac13\)</span>, <span class="arithmatex">\(\int_0^1 \xi(1-\xi)d\xi = \frac16\)</span>, <span class="arithmatex">\(\int_0^1 \xi^2 d\xi = \frac13\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{m}_a = \rho AL\begin{bmatrix}\frac13 &amp; \frac16 \\[4pt] \frac16 &amp; \frac13\end{bmatrix}}
+\]</div>
+<h3 id="73-torsional-mass-fundamental-derivation">7.3 Torsional Mass — Fundamental Derivation</h3>
+<p>The kinetic energy of torsion comes from the rotational motion of the cross-section about the <span class="arithmatex">\(x\)</span>-axis. The velocity field is <span class="arithmatex">\(\dot{U}_y = -z\,\dot{\theta}_x\)</span>, <span class="arithmatex">\(\dot{U}_z = y\,\dot{\theta}_x\)</span>. The squared velocity magnitude is:</p>
+<div class="arithmatex">\[
+\dot{U}_y^2 + \dot{U}_z^2 = (y^2 + z^2)\,\dot{\theta}_x^2 = r^2\,\dot{\theta}_x^2
+\]</div>
+<p>Integrating over the cross-section:</p>
+<div class="arithmatex">\[
+T_t = \frac12\int_0^L \rho\left[\int_A (y^2 + z^2)dA\right] \dot{\theta}_x^2 dx
+= \frac12\int_0^L \rho I_p\,\dot{\theta}_x^2 dx
+\]</div>
+<div class="arithmatex">\[
+\boxed{I_p = \int_A (y^2+z^2)dA = I_y + I_z}
+\]</div>
+<blockquote>
+<p><strong>Critical distinction</strong>:
+- For <strong>stiffness</strong> (<span class="arithmatex">\(GJ\)</span>): <span class="arithmatex">\(J\)</span> is the <strong>torsion constant</strong>, determined by the Saint-Venant torsion problem (stress-based). For non-circular sections, <span class="arithmatex">\(J &lt; I_p\)</span>.
+- For <strong>mass</strong> (<span class="arithmatex">\(\rho I_p\)</span>): <span class="arithmatex">\(I_p = I_y + I_z\)</span> is the <strong>polar moment of inertia</strong> (geometry-only, independent of stress). It is always simply <span class="arithmatex">\(\int(y^2+z^2)dA\)</span>.
+- For circular sections: <span class="arithmatex">\(J = I_p\)</span> (they coincide).
+- For non-circular sections: <span class="arithmatex">\(J \neq I_p\)</span>. Example: a rectangular section <span class="arithmatex">\(b \times h\)</span> has <span class="arithmatex">\(I_p = b^3h/12 + bh^3/12\)</span>, while <span class="arithmatex">\(J \approx bh^3\left[\frac13 - 0.21\frac{h}{b}(1 - \frac{h^4}{12b^4})\right]\)</span> — always less than <span class="arithmatex">\(I_p\)</span>.</p>
+</blockquote>
+<p>Using the linear shape functions <span class="arithmatex">\(N_1, N_2\)</span> for <span class="arithmatex">\(\theta_x(\xi) = (1-\xi)\theta_{x1} + \xi\theta_{x2}\)</span>:</p>
+<div class="arithmatex">\[
+T_t = \frac12\rho I_p L \int_0^1 \bigl[(1-\xi)\dot{\theta}_{x1} + \xi\dot{\theta}_{x2}\bigr]^2 d\xi
+\]</div>
+<p>Therefore:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{m}_t = \rho I_p L \begin{bmatrix}\frac13 &amp; \frac16 \\[4pt] \frac16 &amp; \frac13\end{bmatrix}}
+\]</div>
+<p><strong>The torsional off-diagonal is <span class="arithmatex">\(+\rho I_p L/6\)</span></strong>, identical in sign to the axial off-diagonal since both use the same linear shape functions.</p>
+<h3 id="74-xy-plane-bending-mass">7.4 xy-Plane Bending Mass</h3>
+<p><span class="arithmatex">\(v(\xi) = H_1 v_1 + H_2 \theta_{z1} + H_3 v_2 + H_4 \theta_{z2}\)</span>:</p>
+<div class="arithmatex">\[
+T_{bz} = \frac12\int_0^L \rho A\,\dot{v}^2 dx = \frac12\rho AL\int_0^1 \dot{v}(\xi)^2 d\xi
+\]</div>
+<p>Mass matrix entries <span class="arithmatex">\(m_{ij} = \rho AL\int_0^1 H_i(\xi)H_j(\xi)\,d\xi\)</span>. The Hermite integrals are:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\int_0^1 H_1^2 d\xi &amp;= \frac{13}{35}, &amp;
+\int_0^1 H_2^2 d\xi &amp;= \frac{L^2}{105}, &amp;
+\int_0^1 H_3^2 d\xi &amp;= \frac{13}{35}, &amp;
+\int_0^1 H_4^2 d\xi &amp;= \frac{L^2}{105} \\[4pt]
+\int_0^1 H_1 H_2 d\xi &amp;= \frac{11L}{210}, &amp;
+\int_0^1 H_1 H_3 d\xi &amp;= \frac{9}{70}, &amp;
+\int_0^1 H_1 H_4 d\xi &amp;= -\frac{13L}{420} \\[4pt]
+\int_0^1 H_2 H_3 d\xi &amp;= \frac{13L}{420}, &amp;
+\int_0^1 H_2 H_4 d\xi &amp;= -\frac{L^2}{140}, &amp;
+\int_0^1 H_3 H_4 d\xi &amp;= -\frac{11L}{210}
+\end{aligned}
+\]</div>
+<p>Assembled matrix:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{m}_{bz} = \rho AL\begin{bmatrix}
+\frac{13}{35} &amp; \frac{11L}{210} &amp; \frac{9}{70} &amp; -\frac{13L}{420} \\[6pt]
+\frac{11L}{210} &amp; \frac{L^2}{105} &amp; \frac{13L}{420} &amp; -\frac{L^2}{140} \\[6pt]
+\frac{9}{70} &amp; \frac{13L}{420} &amp; \frac{13}{35} &amp; -\frac{11L}{210} \\[6pt]
+-\frac{13L}{420} &amp; -\frac{L^2}{140} &amp; -\frac{11L}{210} &amp; \frac{L^2}{105}
+\end{bmatrix}}
+\]</div>
+<h3 id="75-xz-plane-bending-mass">7.5 xz-Plane Bending Mass</h3>
+<p>Since <span class="arithmatex">\(\theta_y = -dw/dx\)</span>, the shape functions for <span class="arithmatex">\(\theta_y\)</span> are <span class="arithmatex">\(-H_2\)</span> and <span class="arithmatex">\(-H_4\)</span>, flipping the signs of all <span class="arithmatex">\(w\)</span>-<span class="arithmatex">\(\theta_y\)</span> coupling terms relative to the xy-plane:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{m}_{by} = \rho AL\begin{bmatrix}
+\frac{13}{35} &amp; -\frac{11L}{210} &amp; \frac{9}{70} &amp; \frac{13L}{420} \\[6pt]
+-\frac{11L}{210} &amp; \frac{L^2}{105} &amp; -\frac{13L}{420} &amp; -\frac{L^2}{140} \\[6pt]
+\frac{9}{70} &amp; -\frac{13L}{420} &amp; \frac{13}{35} &amp; \frac{11L}{210} \\[6pt]
+\frac{13L}{420} &amp; -\frac{L^2}{140} &amp; \frac{11L}{210} &amp; \frac{L^2}{105}
+\end{bmatrix}}
+\]</div>
+<h3 id="76-complete-1212-mass-matrix">7.6 Complete 12×12 Mass Matrix</h3>
+<p>Assembled in block form with <span class="arithmatex">\(m_{total} = \rho A L\)</span> and <span class="arithmatex">\(r_x^2 = I_p/A = (I_y + I_z)/A\)</span>:</p>
+<div class="arithmatex">\[
+\mathbf{m}_{loc} = \begin{bmatrix}
+\mathbf{M}_a &amp; \mathbf{M}_b \\[4pt]
+\mathbf{M}_b^T &amp; \mathbf{M}_c
+\end{bmatrix}_{12\times12} \times (\rho A L)
+\]</div>
+<p><strong><span class="arithmatex">\(\mathbf{M}_a\)</span> (Node 1 × Node 1):</strong></p>
+<div class="arithmatex">\[
+\mathbf{M}_a = \begin{bmatrix}
+\frac13 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\[6pt]
+0 &amp; \frac{13}{35} &amp; 0 &amp; 0 &amp; 0 &amp; \frac{11L}{210} \\[6pt]
+0 &amp; 0 &amp; \frac{13}{35} &amp; 0 &amp; -\frac{11L}{210} &amp; 0 \\[6pt]
+0 &amp; 0 &amp; 0 &amp; \frac{r_x^2}{3} &amp; 0 &amp; 0 \\[6pt]
+0 &amp; 0 &amp; -\frac{11L}{210} &amp; 0 &amp; \frac{L^2}{105} &amp; 0 \\[6pt]
+0 &amp; \frac{11L}{210} &amp; 0 &amp; 0 &amp; 0 &amp; \frac{L^2}{105}
+\end{bmatrix}
+\]</div>
+<p><strong><span class="arithmatex">\(\mathbf{M}_b\)</span> (Node 1 × Node 2 coupling):</strong></p>
+<div class="arithmatex">\[
+\mathbf{M}_b = \begin{bmatrix}
+\frac16 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\[6pt]
+0 &amp; \frac{9}{70} &amp; 0 &amp; 0 &amp; 0 &amp; -\frac{13L}{420} \\[6pt]
+0 &amp; 0 &amp; \frac{9}{70} &amp; 0 &amp; \frac{13L}{420} &amp; 0 \\[6pt]
+0 &amp; 0 &amp; 0 &amp; \frac{r_x^2}{6} &amp; 0 &amp; 0 \\[6pt]
+0 &amp; 0 &amp; -\frac{13L}{420} &amp; 0 &amp; -\frac{L^2}{140} &amp; 0 \\[6pt]
+0 &amp; \frac{13L}{420} &amp; 0 &amp; 0 &amp; 0 &amp; -\frac{L^2}{140}
+\end{bmatrix}
+\]</div>
+<p><strong><span class="arithmatex">\(\mathbf{M}_c\)</span> (Node 2 × Node 2):</strong></p>
+<div class="arithmatex">\[
+\mathbf{M}_c = \begin{bmatrix}
+\frac13 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\[6pt]
+0 &amp; \frac{13}{35} &amp; 0 &amp; 0 &amp; 0 &amp; -\frac{11L}{210} \\[6pt]
+0 &amp; 0 &amp; \frac{13}{35} &amp; 0 &amp; \frac{11L}{210} &amp; 0 \\[6pt]
+0 &amp; 0 &amp; 0 &amp; \frac{r_x^2}{3} &amp; 0 &amp; 0 \\[6pt]
+0 &amp; 0 &amp; \frac{11L}{210} &amp; 0 &amp; \frac{L^2}{105} &amp; 0 \\[6pt]
+0 &amp; -\frac{11L}{210} &amp; 0 &amp; 0 &amp; 0 &amp; \frac{L^2}{105}
+\end{bmatrix}
+\]</div>
+<blockquote>
+<p><strong><span class="arithmatex">\(\mathbf{M}_b[3,3] = +r_x^2/6\)</span></strong>, not <span class="arithmatex">\(-r_x^2/6\)</span>. Both axial and torsional off-diagonal coupling masses are positive, since both use the same linear Lagrange shape functions with identical sign conventions.</p>
+</blockquote>
+<h4 id="rigid-body-verification_1">Rigid-Body Verification</h4>
+<p><strong>Torsion</strong> (<span class="arithmatex">\(\dot{\theta}_{x1} = \dot{\theta}_{x2} = \omega\)</span>):</p>
+<div class="arithmatex">\[
+T_t = \frac12\begin{bmatrix}\omega &amp; \omega\end{bmatrix}
+\rho I_p L\begin{bmatrix}\frac13 &amp; \frac16 \\ \frac16 &amp; \frac13\end{bmatrix}
+\begin{bmatrix}\omega \\ \omega\end{bmatrix}
+= \frac12\,\rho I_p L\,\omega^2
+\]</div>
+<p>Continuum: <span class="arithmatex">\(T = \frac12\int_0^L \rho I_p \omega^2 dx = \frac12 \rho I_p L \omega^2\)</span> <span class="arithmatex">\(\checkmark\)</span></p>
+<p><strong>Axial</strong> (<span class="arithmatex">\(\dot{u}_1 = \dot{u}_2 = \omega\)</span>):</p>
+<div class="arithmatex">\[
+T_a = \frac12\begin{bmatrix}\omega &amp; \omega\end{bmatrix}
+\rho A L\begin{bmatrix}\frac13 &amp; \frac16 \\ \frac16 &amp; \frac13\end{bmatrix}
+\begin{bmatrix}\omega \\ \omega\end{bmatrix}
+= \frac12\,\rho A L\,\omega^2
+\]</div>
+<p>Continuum: <span class="arithmatex">\(T = \frac12 \rho A L \omega^2\)</span> <span class="arithmatex">\(\checkmark\)</span></p>
+<p><strong>y-direction translation</strong> (<span class="arithmatex">\(\dot{v}_1 = \dot{v}_2 = \omega\)</span>, <span class="arithmatex">\(\dot{\theta}_{z1} = \dot{\theta}_{z2} = 0\)</span>):</p>
+<div class="arithmatex">\[
+T_{bz} = \frac12\rho AL \Bigl[\frac{13}{35}\omega^2 + \frac{9}{70}\omega^2 + \frac{9}{70}\omega^2 + \frac{13}{35}\omega^2\Bigr]
+= \frac12\rho AL\,\omega^2\left(\frac{26}{35} + \frac{18}{70}\right) = \frac12\rho AL\,\omega^2
+\]</div>
+<p>where <span class="arithmatex">\(\frac{26}{35} + \frac{18}{70} = \frac{52}{70} + \frac{18}{70} = 1\)</span> <span class="arithmatex">\(\checkmark\)</span></p>
+<hr />
+<h2 id="8-3d-coordinate-transformation">8. 3D Coordinate Transformation</h2>
+<h3 id="81-local-coordinate-system">8.1 Local Coordinate System</h3>
+<p>The local <span class="arithmatex">\(x\)</span>-axis is along the element:</p>
+<div class="arithmatex">\[
+\mathbf{e}_1 = \frac{\mathbf{p}_2 - \mathbf{p}_1}{L}, \qquad
+L = \|\mathbf{p}_2 - \mathbf{p}_1\|
+\]</div>
+<p>The local <span class="arithmatex">\(z\)</span>-axis is perpendicular to <span class="arithmatex">\(\mathbf{e}_1\)</span> and lies in the <span class="arithmatex">\(\mathbf{e}_1\)</span>-<span class="arithmatex">\(\mathbf{v}\)</span> plane, where <span class="arithmatex">\(\mathbf{v}\)</span> is a reference vector (typically the global <span class="arithmatex">\(Z\)</span>-axis <span class="arithmatex">\([0,0,1]^T\)</span>):</p>
+<div class="arithmatex">\[
+\mathbf{e}_3 = \frac{\mathbf{v} \times \mathbf{e}_1}{\|\mathbf{v} \times \mathbf{e}_1\|}, \qquad
+\mathbf{e}_2 = \mathbf{e}_3 \times \mathbf{e}_1
+\]</div>
+<h3 id="82-vertical-element-singularity">8.2 Vertical Element Singularity</h3>
+<p>When <span class="arithmatex">\(\mathbf{e}_1 \parallel \mathbf{v}\)</span> (vertical element), <span class="arithmatex">\(\mathbf{v} \times \mathbf{e}_1 = \mathbf{0}\)</span>. Use the global <span class="arithmatex">\(X\)</span>-axis <span class="arithmatex">\([1,0,0]^T\)</span> as the reference instead:</p>
+<div class="arithmatex">\[
+\mathbf{e}_2 = \frac{\mathbf{e}_1 \times [1,0,0]^T}{\|\mathbf{e}_1 \times [1,0,0]^T\|}, \qquad
+\mathbf{e}_3 = \mathbf{e}_1 \times \mathbf{e}_2
+\]</div>
+<h3 id="83-transformation-matrix">8.3 Transformation Matrix</h3>
+<p>The 3×3 rotation matrix from global to local coordinates:</p>
+<div class="arithmatex">\[
+\mathbf{T}_i = \begin{bmatrix} e_{1x} &amp; e_{1y} &amp; e_{1z} \\ e_{2x} &amp; e_{2y} &amp; e_{2z} \\ e_{3x} &amp; e_{3y} &amp; e_{3z} \end{bmatrix}
+\]</div>
+<p>Properties: <span class="arithmatex">\(\mathbf{T}_i^T = \mathbf{T}_i^{-1}\)</span>, <span class="arithmatex">\(\det(\mathbf{T}_i) = 1\)</span>.</p>
+<p>The 12×12 block-diagonal transformation matrix:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{T} = \begin{bmatrix}
+\mathbf{T}_i &amp; &amp; &amp; \\
+&amp; \mathbf{T}_i &amp; &amp; \\
+&amp; &amp; \mathbf{T}_i &amp; \\
+&amp; &amp; &amp; \mathbf{T}_i
+\end{bmatrix}_{12\times12}}
+\]</div>
+<p>Matrix transformation:</p>
+<div class="arithmatex">\[
+\mathbf{k}_{glob} = \mathbf{T}^T \mathbf{k}_{loc} \mathbf{T},\qquad
+\mathbf{m}_{glob} = \mathbf{T}^T \mathbf{m}_{loc} \mathbf{T}
+\]</div>
+<hr />
+<h2 id="9-global-assembly">9. Global Assembly</h2>
+<p>Using the direct stiffness method, element matrices are summed into the global system via DOF index mapping:</p>
+<div class="arithmatex">\[
+\mathbf{K}_{glob} = \sum_{e=1}^{N_e} \mathbf{A}_e^T \mathbf{k}_{glob}^{(e)} \mathbf{A}_e
+\]</div>
+<p>Numerical implementation using precomputed index arrays:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">global_mat</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">local_mat</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+</code></pre></div>
+<p>Dirichlet boundary conditions are applied by zeroing rows/columns and setting diagonal entries to 1:</p>
+<div class="arithmatex">\[
+\tilde{K}_{ii} = \begin{cases}
+1 &amp; i \in \text{BC} \\
+K_{ii} &amp; \text{otherwise}
+\end{cases},\quad
+\tilde{K}_{ij} = \begin{cases}
+0 &amp; i \in \text{BC} \text{ or } j \in \text{BC}, i \neq j \\
+K_{ij} &amp; \text{otherwise}
+\end{cases}
+\]</div>
+<hr />
+<h2 id="10-common-implementation-errors">10. Common Implementation Errors</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Location</th>
+<th style="text-align: center;">Incorrect</th>
+<th style="text-align: center;">Correct</th>
+<th style="text-align: center;">Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(r_x^2\)</span> definition</td>
+<td style="text-align: center;"><span class="arithmatex">\(J / A\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\((I_y + I_z)\,/\,A\)</span></td>
+<td style="text-align: center;">Mass matrix uses the polar moment <span class="arithmatex">\(I_p = I_y + I_z\)</span> (kinetic energy), not the torsion constant <span class="arithmatex">\(J\)</span> (stiffness). For circular sections <span class="arithmatex">\(J = I_p\)</span>, but for non-circular sections <span class="arithmatex">\(J \neq I_p\)</span>.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(\mathbf{M}_b[3,3]\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-\,r_x^2/6\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(+\,r_x^2/6\)</span></td>
+<td style="text-align: center;">Torsional off-diagonal uses the same linear shape functions as axial, where the coupling is positive. A negative sign would under-report the rigid-body torsional kinetic energy by a factor of 3.</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>stiffness matrix</strong> is correct in both cases — it correctly uses <span class="arithmatex">\(GJ\)</span>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.path", "navigation.indexes", "navigation.top", "navigation.tracking", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../assets/javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3.2.2/es5/tex-chtml-full.js"></script>
+      
+    
+  </body>
+</html>

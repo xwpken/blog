@@ -1,0 +1,11 @@
+/* Center all display equations rendered by MathJax */
+.mjx-container[display="true"] {
+  display: block;
+  text-align: center !important;
+  margin: 1em 0;
+}
+
+/* Keep inline equations inline */
+.mjx-container[display="false"] {
+  display: inline-block;
+}
